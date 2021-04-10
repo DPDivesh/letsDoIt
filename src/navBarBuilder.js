@@ -17,6 +17,7 @@ function structureBuilder(){
 function buttonBuilder(){
   //build Buttons Default Container
   //build Buttons added Button Conainer
+    //maybe add an eraser for the added Button Container for easy reload, or make a general eraser for classes
 };
 
 
