@@ -4,12 +4,23 @@
 function mainContentBuilder(){
   //create container
   //Determine what page we're on if we dont use function call event listeners or make this a constructor and have the event listener call said constructor
+  //example *click button* calls specificButton.Today();
+  //newProjectBuilder 
 
 }
 
 
 const specificButton=(()=>{
   //individual button maker
+  //build todos as part of a button maker
   //prebuilt buttons
-  
+
 })();
+
+
+
+
+function defaultButton(){
+  //prebuilt buttons
+
+}
