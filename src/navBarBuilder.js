@@ -7,19 +7,8 @@ export function navBarBuilder(){
   //Make View All Button
   console.log('big test');
   navContainerBuilder();
-  addProjects();
 }
 
-export function structureBuilder(){
-  containerBuilder();
-
-  //build Main container
-  //Button Builder function
-  //build Default Button Container
-  //build added Button Container
-
-
-};
 
 //Two choices either build buttons in both containers or when called in structure
 //will do build in both to avoid breakin solid rules
@@ -35,8 +24,8 @@ export function structureBuilder(){
  function defaultButtonAggregate(){
 //calls all default button functions from default buttons module
 
-
 }
+
 function navContainerBuilder(){
 //create the overall container for nav
   const queryBody = document.body;
@@ -46,15 +35,25 @@ function navContainerBuilder(){
   queryBody.appendChild(toMain);
   //create the default buttons container
   defaultButtonContainerBuilder(toMain);
-  
-
-
+  //create projects button
+  addProjects();
+  //create the added buttons container
+  addedButtonContainerBuilder(toMain);
   }
+
+
 
   function defaultButtonContainerBuilder(mainContainerAppender){
-    const deafaultContainer = document.createElement('div');
-    deafaultContainer.className=('defaultButtonContainer')
-    mainContainerAppender.appendChild(deafaultContainer);
+    const defaultContainer = document.createElement('div');
+    defaultContainer.className=('defaultButtonContainer')
+    mainContainerAppender.appendChild(defaultContainer);
 
   }
+  
+  function addedButtonContainerBuilder(mainContainerAppender){
+    const addedButtonContainerBuilder = document.createElement('div');
+    addedButtonContainerBuilder.className=('addedButtonContainer')
+    mainContainerAppender.appendChild(addedButtonContainerBuilder);
+  }
+  
   
