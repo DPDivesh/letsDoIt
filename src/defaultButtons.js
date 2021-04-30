@@ -1,4 +1,5 @@
 import {emoji} from './navBarBuilder';
+import {projectsListerner,defaultButtonListerner} from './defaultButtonListeners';
 //Notification
 //Today
 //This week
@@ -65,21 +66,14 @@ build:()=>{
   let newButtonText = document.createElement('p');
   let buttonIcon = document.createElement('img');
   buttonIcon.src = pageState.emoji;
-  buttonIcon.width='25'
-  newButton.append(buttonIcon);
-  newButton.className = pageState.name + "DefaultButtonContainer";
-  console.log(buttonLocation);
-  newButton.style.width='100%';
-  newButton.style.height='5.5vh'; 
-  newButton.style.minHeight='50px'; 
-  newButton.style.backgroundColor='#F6F6F6';
-  newButton.style.display='flex';
-  buttonIcon.style.marginLeft='15%'
+  buttonIcon.className='buttonIcon';
+defaultButtonListerner(newButton);
 
+  newButton.append(buttonIcon);
+  newButton.className = 'defaultButtons';
+  console.log(buttonLocation);
+  buttonIcon.style.marginLeft='12%'
   newButtonText.innerHTML = pageState.name;
-  
-  newButton.style.alignItems='center';
-  newButton.style.fontSize='calc(10px + 1vw)';
   newButton.append(newButtonText);
   buttonLocation.appendChild(newButton);
   console.log(buttonLocation,'hi');
@@ -122,17 +116,7 @@ export function projectViewAllButton(projectHold){
 
 };
 
-function projectsListerner(divContainer,elementClicked){
 
-  const expand = document.querySelector('imgExpand');
-  divContainer.addEventListener('click',()=>{
-    //change state of content 
-    //add animation 
-    console.log('test');
-  })
-  divContainer.appendChild(elementClicked)
-
-}
 
 const todos=(()=>{
   //make todos for each default button
