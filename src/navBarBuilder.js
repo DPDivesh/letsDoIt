@@ -1,18 +1,33 @@
-import {addProjects} from './defaultButtons';
+import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth} from './defaultButtons';
 
+
+
+export const emoji = {
+  arrowExpand:'images/arrowExpand.png',
+  Notifications:'images/notifications.png' ,
+  Today:'images/today.png',
+  thisWeek:'images/thisWeek.png',
+  thisMonth:'images/thisMonth.png'
+}
 
 export function navBarBuilder(){
   //Make Structure
   //Make Buttons
   //Make View All Button
-  console.log('big test');
   navContainerBuilder();
+  buttonBuilder();
 }
 
 
 //Two choices either build buttons in both containers or when called in structure
 //will do build in both to avoid breakin solid rules
  function buttonBuilder(){
+  defaultMonth('Notifications').build();
+  defaultToday('Today').build();
+  defaultWeek('This Week').build();
+  defaultMonth('This Month').build();
+
+
   //build Buttons calls Default Button Aggregate
   //build Buttons added Button
 
@@ -39,6 +54,12 @@ function navContainerBuilder(){
   addProjects();
   //create the added buttons container
   addedButtonContainerBuilder(toMain);
+  //create viewAllProjectsContainer
+    projectViewAllButtonContainer(toMain);
+
+    const projectContainer = document.querySelector('.viewAllProjectsContainer');
+    projectViewAllButton(projectContainer);
+    
   }
 
 
@@ -56,4 +77,14 @@ function navContainerBuilder(){
     mainContainerAppender.appendChild(addedButtonContainerBuilder);
   }
   
+  const Project = ()=>{
+
+  };
+
+  function projectViewAllButtonContainer(mainContainerAppender){
+    const projectViewAllButton = document.createElement('div');
+    projectViewAllButton.className='viewAllProjectsContainer';
+    mainContainerAppender.appendChild(projectViewAllButton);
+
+  };
   
