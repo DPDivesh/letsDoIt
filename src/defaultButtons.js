@@ -11,6 +11,9 @@ export const defaultNotifications=(name)=>{
     name,
     emoji:emoji.Notifications
   }
+  const makePage=>(){
+    console.log('making the page')
+  }
 return Object.assign(
   {},
   createButton(pageState),
@@ -50,10 +53,10 @@ return Object.assign(
 }
 
 //create assignment objects for values
-//things in common 
-//property to build button with listener and 
+//things in common
+//property to build button with listener and
 //change page to the state of what is chosen
-// 
+//
 
 
 
@@ -67,12 +70,12 @@ build:()=>{
   let buttonIcon = document.createElement('img');
   buttonIcon.src = pageState.emoji;
   buttonIcon.className='buttonIcon';
-defaultButtonListerner(newButton);
+  defaultButtonListerner(newButton);
 
   newButton.append(buttonIcon);
   newButton.className = 'defaultButtons';
   console.log(buttonLocation);
-  buttonIcon.style.marginLeft='12%'
+  buttonIcon.style.marginLeft='12%';
   newButtonText.innerHTML = pageState.name;
   newButton.append(newButtonText);
   buttonLocation.appendChild(newButton);
@@ -97,12 +100,12 @@ export function addProjects(){
    const projectExpand = document.createElement('img');
    projectExpand.src = emoji.arrowExpand;
    projectExpand.className='imgExpand';
-   console.log('imma test')
+   console.log('imma test');
    projectsListerner(projectsAdd,projectExpand);
    //create projects text
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";
-  projectsAdd.appendChild(projectsText);  
+  projectsAdd.appendChild(projectsText);
   queryNav.appendChild(projectsAdd);
 }
 
@@ -112,7 +115,7 @@ export function projectViewAllButton(projectHold){
   projectViewAll.value='View All Projects';
   projectViewAll.className = 'viewAllProjectsButton';
   projectHold.appendChild(projectViewAll);
-   
+
 
 };
 

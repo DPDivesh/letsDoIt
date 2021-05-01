@@ -12,7 +12,7 @@ body{
   align-items: center;
   justify-content: center;
   min-width: 200px;
-  min-height: 200px;
+  min-height: 100vh;
   max-width: 300px;
   width: 15vw;
   height: 100vh;
@@ -48,7 +48,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
  .projectsNav p{
@@ -57,7 +57,7 @@ body{
   margin: 0;
   margin-right: 2vw;
   color: #909090;
-} 
+}
 
 
 
@@ -71,12 +71,12 @@ body{
 
 .buttonIcon{
   width:calc(17px + .5vw);
-  
+
 }
 
 .defaultButtonContainer{
-min-height: 250px;
-height: 300px;
+min-height: 235px;
+max-height:30vh;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -114,7 +114,7 @@ flex-direction: column;
 
 .viewAllProjectsContainer{
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   min-height: 70px;
   height: 4vh;
 }
@@ -146,4 +146,3 @@ flex-direction: column;
   height:100vh;
   background-color: white;
 }
-
