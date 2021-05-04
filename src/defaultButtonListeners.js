@@ -18,11 +18,30 @@ newButtonDiv.addEventListener('click',()=>{
 
 
 //projects up down arrow
-export function projectsListerner(divContainer,elementClicked){
-  divContainer.addEventListener('click',()=>{
+export function projectsExpandListerner(elementClicked){
+  elementClicked.addEventListener('click',()=>{
     //change state of content
     //add animation
-    console.log('test');
+    console.log('Expand');
+  })
+
+}
+//projects Add Button
+export function projectsAddListerner(elementClicked){
+  elementClicked.addEventListener('click',()=>{
+    //create submit additional projects mini form 
+    console.log('Add');
+    let createSubmitComponent = document.createElement('div');
+    createSubmitComponent.className = 'projectAdd';
+    let createBackgroundComponent = document.createElement('div');
+    createBackgroundComponent.style.width='52.2vw'
+    createBackgroundComponent.style.backgroundColor="#560BAD";
+    let createSecondLayer = document.createElement('div');
+    createBackgroundComponent.style.backgroundColor="#FFFFF";
+    let contentDocuement = document.getElementById(content)
+    contentDocuement.appendChild(createSubmitComponent);
+    createSubmitComponent.appendChild(createBackgroundComponent);
+
   })
 
 }

@@ -7,7 +7,8 @@ export const emoji = {
   Notifications:'images/notifications.png' ,
   Today:'images/today.png',
   thisWeek:'images/thisWeek.png',
-  thisMonth:'images/thisMonth.png'
+  thisMonth:'images/thisMonth.png',
+  plusIcon: 'images/plusIcon.png'
 }
 
 export function navBarBuilder(){

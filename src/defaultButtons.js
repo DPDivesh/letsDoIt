@@ -1,5 +1,5 @@
 import {emoji} from './navBarBuilder';
-import {projectsListerner,defaultButtonListerner} from './defaultButtonListeners';
+import {projectsExpandListerner,projectsAddListerner,defaultButtonListerner} from './defaultButtonListeners';
 //Notification
 //Today
 //This week
@@ -108,7 +108,6 @@ build:()=>{
 
 
 
-
 export function addProjects(){
   //make container and font for projects
   const queryNav = document.querySelector('.navContentContainer');
@@ -119,13 +118,19 @@ export function addProjects(){
    projectExpand.src = emoji.arrowExpand;
    projectExpand.className='imgExpand';
    console.log('imma test');
-   projectsListerner(projectsAdd,projectExpand);
+   projectsExpandListerner(projectExpand);
    projectsAdd.appendChild(projectExpand)
    //create projects text
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";
   projectsAdd.appendChild(projectsText);
   queryNav.appendChild(projectsAdd);
+  //create the add new projects button
+  let buttonExpandIcon = document.createElement('img');
+  buttonExpandIcon.src = emoji.plusIcon;  
+  buttonExpandIcon.className = 'imgExpand';
+  projectsAddListerner(buttonExpandIcon);
+  projectsAdd.appendChild(buttonExpandIcon);
 }
 
 export function projectViewAllButton(projectHold){
