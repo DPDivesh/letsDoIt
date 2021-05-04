@@ -1,4 +1,4 @@
-import {addProjects,projectViewAllButton,buttonBuilder} from './defaultButtons';
+import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth} from './defaultButtons';
 
 
 
@@ -21,7 +21,18 @@ export function navBarBuilder(){
 
 //Two choices either build buttons in both containers or when called in structure
 //will do build in both to avoid breakin solid rules
+ function buttonBuilder(){
+  defaultMonth('Notifications').build();
+  defaultToday('Today').build();
+  defaultWeek('This Week').build();
+  defaultMonth('This Month').build();
 
+
+  //build Buttons calls Default Button Aggregate
+  //build Buttons added Button
+
+    //maybe add an eraser for the added Button Container for easy reload, or make a general eraser for classes
+};
 
 
 // each default button has its own function and they go to an aggregate

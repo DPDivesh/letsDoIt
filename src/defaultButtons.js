@@ -1,84 +1,51 @@
-import {emoji,} from './navBarBuilder';
+import {emoji} from './navBarBuilder';
 import {projectsListerner,defaultButtonListerner} from './defaultButtonListeners';
-
 //Notification
 //Today
 //This week
 //This month
-let defaultButtons = []
 
 
-export function buttonBuilder(){
-  defaultNotifications().build();
-  defaultButtons.push(defaultNotifications());
-  defaultToday().build();
-  defaultButtons.push(defaultToday());
-  console.log(defaultButtons);
-
-  defaultWeek().build();
-  defaultButtons.push(defaultWeek());
-  defaultMonth().build();
-  defaultButtons.push(defaultMonth());
-  console.log(defaultButtons);
-  //build Buttons calls Default Button Aggregate
-  //build Buttons added Button
-
-    //maybe add an eraser for the added Button Container for easy reload, or make a general eraser for classes
-};
-
- const defaultNotifications=()=>{
+export const defaultNotifications=(name)=>{
   let pageState = {
-    name:"Notications",
-    emoji:emoji.Notifications,
-    id: "notifPage",
-    // makeNotifPage:()=>{console.log('making the notifs') 
-  };
-  const makeNotifPage={
-    makeNotifPage:()=>{console.log('making the notifs') 
-
+    name,
+    emoji:emoji.Notifications
   }
-  }
-
-return Object.assign( {},
-  createButton(pageState),pageState,makeNotifPage
+return Object.assign(
+  {},
+  createButton(pageState),
 )
 
 }
 
-const defaultToday=()=>{
+export const defaultToday=(name)=>{
   let pageState = {
-    name:'Today',
-    emoji:emoji.Today,
-    id: "todayPage",
-  }
+    name,
+    emoji:emoji.Today  }
 return Object.assign(
   {},
-  createButton(pageState),pageState
+  createButton(pageState),
 )
 }
 
- const defaultWeek=()=>{
+export const defaultWeek=(name)=>{
   let pageState = {
-    name:'This Week',
-    emoji:emoji.thisWeek,
-    id: "weekPage",
-  }
+    name,
+    emoji:emoji.thisWeek  }
 return Object.assign(
   {},
-  createButton(pageState),pageState
+  createButton(pageState),
 )
 }
 
 
- const defaultMonth=()=>{
+export const defaultMonth=(name)=>{
   let pageState = {
-    name:'This Month',
-    emoji:emoji.thisMonth,
-    id: "monthPage",
-  }
+    name,
+    emoji:emoji.thisMonth  }
 return Object.assign(
   {},
-  createButton(pageState),pageState
+  createButton(pageState),
 )
 }
 
@@ -89,24 +56,28 @@ return Object.assign(
 // 
 
 
+
 const createButton = (pageState)=>({
 
 build:()=>{
+  console.log(pageState.name + "hi")
   let buttonLocation = document.querySelector('.defaultButtonContainer');
   let newButton = document.createElement('div');
   let newButtonText = document.createElement('p');
   let buttonIcon = document.createElement('img');
   buttonIcon.src = pageState.emoji;
   buttonIcon.className='buttonIcon';
+defaultButtonListerner(newButton);
+
   newButton.append(buttonIcon);
   newButton.className = 'defaultButtons';
-  newButton.id = pageState.id;
+  console.log(buttonLocation);
   buttonIcon.style.marginLeft='12%'
   newButtonText.innerHTML = pageState.name;
   newButton.append(newButtonText);
   buttonLocation.appendChild(newButton);
-  const newButtonEvent = document.getElementById(pageState.id);
-  defaultButtonListerner(newButtonEvent,defaultButtons);
+  console.log(buttonLocation,'hi');
+
 
 }
 
@@ -151,6 +122,3 @@ const todos=(()=>{
   //make todos for each default button
 
 })();
-
-
-export {defaultButtons}
