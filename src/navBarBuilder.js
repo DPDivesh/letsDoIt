@@ -7,7 +7,8 @@ export const emoji = {
   Notifications:'images/notifications.png' ,
   Today:'images/today.png',
   thisWeek:'images/thisWeek.png',
-  thisMonth:'images/thisMonth.png'
+  thisMonth:'images/thisMonth.png',
+  plusIcon: 'images/plusIcon.png'
 }
 
 export function navBarBuilder(){
@@ -22,10 +23,10 @@ export function navBarBuilder(){
 //Two choices either build buttons in both containers or when called in structure
 //will do build in both to avoid breakin solid rules
  function buttonBuilder(){
-  defaultMonth('Notifications').build();
-  defaultToday('Today').build();
-  defaultWeek('This Week').build();
-  defaultMonth('This Month').build();
+  defaultNotifications().build();
+  defaultToday().build();
+  defaultWeek().build();
+  defaultMonth().build();
 
 
   //build Buttons calls Default Button Aggregate
@@ -59,7 +60,7 @@ function navContainerBuilder(){
 
     const projectContainer = document.querySelector('.viewAllProjectsContainer');
     projectViewAllButton(projectContainer);
-    
+
   }
 
 
@@ -70,13 +71,13 @@ function navContainerBuilder(){
     mainContainerAppender.appendChild(defaultContainer);
 
   }
-  
+
   function addedButtonContainerBuilder(mainContainerAppender){
     const addedButtonContainerBuilder = document.createElement('div');
     addedButtonContainerBuilder.className=('addedButtonContainer')
     mainContainerAppender.appendChild(addedButtonContainerBuilder);
   }
-  
+
   const Project = ()=>{
 
   };
@@ -87,4 +88,3 @@ function navContainerBuilder(){
     mainContainerAppender.appendChild(projectViewAllButton);
 
   };
-  

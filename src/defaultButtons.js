@@ -1,59 +1,80 @@
 import {emoji} from './navBarBuilder';
-import {projectsListerner,defaultButtonListerner} from './defaultButtonListeners';
+import {projectsExpandListerner,projectsAddListerner,defaultButtonListerner} from './defaultButtonListeners';
 //Notification
 //Today
 //This week
 //This month
 
 
-export const defaultNotifications=(name)=>{
+export const defaultNotifications=()=>{
   let pageState = {
-    name,
-    emoji:emoji.Notifications
+    name:"Notifications",
+    emoji:emoji.Notifications,
+  }
+
+let objectFunctions = {
+   makeNotifPage:()=>{
+    console.log("Notifications Page");
+  }
   }
 return Object.assign(
   {},
-  createButton(pageState),
+  createButton(pageState),objectFunctions,pageState
 )
 
 }
 
 export const defaultToday=(name)=>{
   let pageState = {
-    name,
+    name:"Today",
     emoji:emoji.Today  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
+    let objectFunctions = {
+       makeTodayPage:()=>{
+        console.log("Today Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
 }
 
-export const defaultWeek=(name)=>{
+export const defaultWeek=()=>{
   let pageState = {
-    name,
+    name:'This Week',
     emoji:emoji.thisWeek  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
-}
+    let objectFunctions = {
+       makeThisWeekPage:()=>{
+        console.log("Week Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
+  }
 
 
-export const defaultMonth=(name)=>{
+export const defaultMonth=()=>{
   let pageState = {
-    name,
+    name:'This Month',
     emoji:emoji.thisMonth  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
+    let objectFunctions = {
+       makeMonthPage:()=>{
+        console.log("Month Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
 }
 
 //create assignment objects for values
-//things in common 
-//property to build button with listener and 
+//things in common
+//property to build button with listener and
 //change page to the state of what is chosen
-// 
+//
 
 
 
@@ -67,12 +88,12 @@ build:()=>{
   let buttonIcon = document.createElement('img');
   buttonIcon.src = pageState.emoji;
   buttonIcon.className='buttonIcon';
-defaultButtonListerner(newButton);
+  defaultButtonListerner(newButton);
 
   newButton.append(buttonIcon);
   newButton.className = 'defaultButtons';
   console.log(buttonLocation);
-  buttonIcon.style.marginLeft='12%'
+  buttonIcon.style.marginLeft='12%';
   newButtonText.innerHTML = pageState.name;
   newButton.append(newButtonText);
   buttonLocation.appendChild(newButton);
@@ -87,7 +108,6 @@ defaultButtonListerner(newButton);
 
 
 
-
 export function addProjects(){
   //make container and font for projects
   const queryNav = document.querySelector('.navContentContainer');
@@ -97,13 +117,20 @@ export function addProjects(){
    const projectExpand = document.createElement('img');
    projectExpand.src = emoji.arrowExpand;
    projectExpand.className='imgExpand';
-   console.log('imma test')
-   projectsListerner(projectsAdd,projectExpand);
+   console.log('imma test');
+   projectsExpandListerner(projectExpand);
+   projectsAdd.appendChild(projectExpand)
    //create projects text
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";
-  projectsAdd.appendChild(projectsText);  
+  projectsAdd.appendChild(projectsText);
   queryNav.appendChild(projectsAdd);
+  //create the add new projects button
+  let buttonExpandIcon = document.createElement('img');
+  buttonExpandIcon.src = emoji.plusIcon;  
+  buttonExpandIcon.className = 'imgExpand';
+  projectsAddListerner(buttonExpandIcon);
+  projectsAdd.appendChild(buttonExpandIcon);
 }
 
 export function projectViewAllButton(projectHold){
@@ -112,7 +139,7 @@ export function projectViewAllButton(projectHold){
   projectViewAll.value='View All Projects';
   projectViewAll.className = 'viewAllProjectsButton';
   projectHold.appendChild(projectViewAll);
-   
+
 
 };
 
