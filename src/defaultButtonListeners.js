@@ -2,17 +2,18 @@
 
 //create event listeners for other default buttons
 
-export function defaultButtonListerner(newButtonDiv){
+import {defaultNotifications} from "./defaultButtons";
+
+export function defaultButtonListerner(newButtonDiv,pageName){
 newButtonDiv.addEventListener('click',()=>{
-  console.log("working??")
+  console.log(newButtonDiv);
+
+
 })
 
 
 
 }
-
-
-
 
 
 
@@ -23,6 +24,5 @@ export function projectsListerner(divContainer,elementClicked){
     //add animation
     console.log('test');
   })
-  divContainer.appendChild(elementClicked)
 
 }

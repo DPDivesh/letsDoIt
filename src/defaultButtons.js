@@ -6,50 +6,68 @@ import {projectsListerner,defaultButtonListerner} from './defaultButtonListeners
 //This month
 
 
-export const defaultNotifications=(name)=>{
+export const defaultNotifications=()=>{
   let pageState = {
-    name,
-    emoji:emoji.Notifications
+    name:"Notifications",
+    emoji:emoji.Notifications,
   }
-  const makePage=>(){
-    console.log('making the page')
+
+let objectFunctions = {
+   makeNotifPage:()=>{
+    console.log("Notifications Page");
+  }
   }
 return Object.assign(
   {},
-  createButton(pageState),
+  createButton(pageState),objectFunctions,pageState
 )
 
 }
 
 export const defaultToday=(name)=>{
   let pageState = {
-    name,
+    name:"Today",
     emoji:emoji.Today  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
+    let objectFunctions = {
+       makeTodayPage:()=>{
+        console.log("Today Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
 }
 
-export const defaultWeek=(name)=>{
+export const defaultWeek=()=>{
   let pageState = {
-    name,
+    name:'This Week',
     emoji:emoji.thisWeek  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
-}
+    let objectFunctions = {
+       makeThisWeekPage:()=>{
+        console.log("Week Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
+  }
 
 
-export const defaultMonth=(name)=>{
+export const defaultMonth=()=>{
   let pageState = {
-    name,
+    name:'This Month',
     emoji:emoji.thisMonth  }
-return Object.assign(
-  {},
-  createButton(pageState),
-)
+    let objectFunctions = {
+       makeMonthPage:()=>{
+        console.log("Month Page");
+      }
+      }
+    return Object.assign(
+      {},
+      createButton(pageState),objectFunctions,pageState
+    )
 }
 
 //create assignment objects for values
@@ -102,6 +120,7 @@ export function addProjects(){
    projectExpand.className='imgExpand';
    console.log('imma test');
    projectsListerner(projectsAdd,projectExpand);
+   projectsAdd.appendChild(projectExpand)
    //create projects text
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";
