@@ -1,5 +1,4 @@
-import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth} from './defaultButtons';
-
+import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth, defaultButtons} from './defaultButtons';
 
 
 export const emoji = {
@@ -24,9 +23,15 @@ export function navBarBuilder(){
 //will do build in both to avoid breakin solid rules
  function buttonBuilder(){
   defaultNotifications().build();
+  defaultButtons.push(defaultNotifications());
+  console.log(defaultButtons);
   defaultToday().build();
+  defaultButtons.push(defaultToday());
+
   defaultWeek().build();
+  defaultButtons.push(defaultWeek());
   defaultMonth().build();
+  defaultButtons.push(defaultMonth());
 
 
   //build Buttons calls Default Button Aggregate
@@ -78,9 +83,7 @@ function navContainerBuilder(){
     mainContainerAppender.appendChild(addedButtonContainerBuilder);
   }
 
-  const Project = ()=>{
 
-  };
 
   function projectViewAllButtonContainer(mainContainerAppender){
     const projectViewAllButton = document.createElement('div');
@@ -88,3 +91,5 @@ function navContainerBuilder(){
     mainContainerAppender.appendChild(projectViewAllButton);
 
   };
+
+  export {defaultButtons};

@@ -4,17 +4,20 @@ import {projectsExpandListerner,projectsAddListerner,defaultButtonListerner} fro
 //Today
 //This week
 //This month
+let defaultButtons = [];
 
 
 export const defaultNotifications=()=>{
   let pageState = {
     name:"Notifications",
     emoji:emoji.Notifications,
+    id:'notifPage'
   }
 
 let objectFunctions = {
-   makeNotifPage:()=>{
+   makePage:()=>{
     console.log("Notifications Page");
+    notificationPage();
   }
   }
 return Object.assign(
@@ -27,10 +30,13 @@ return Object.assign(
 export const defaultToday=(name)=>{
   let pageState = {
     name:"Today",
-    emoji:emoji.Today  }
+    emoji:emoji.Today,
+    id:'TodayPage'  }
     let objectFunctions = {
-       makeTodayPage:()=>{
+       makePage:()=>{
         console.log("Today Page");
+        todayPage();
+
       }
       }
     return Object.assign(
@@ -42,10 +48,12 @@ export const defaultToday=(name)=>{
 export const defaultWeek=()=>{
   let pageState = {
     name:'This Week',
-    emoji:emoji.thisWeek  }
+    emoji:emoji.thisWeek,
+    id: "weekPage"  }
     let objectFunctions = {
-       makeThisWeekPage:()=>{
+       makePage:()=>{
         console.log("Week Page");
+        weekPage();
       }
       }
     return Object.assign(
@@ -58,10 +66,12 @@ export const defaultWeek=()=>{
 export const defaultMonth=()=>{
   let pageState = {
     name:'This Month',
-    emoji:emoji.thisMonth  }
+    emoji:emoji.thisMonth,
+    id:'monthPage'  }
     let objectFunctions = {
-       makeMonthPage:()=>{
+       makePage:()=>{
         console.log("Month Page");
+        monthPage();
       }
       }
     return Object.assign(
@@ -86,9 +96,10 @@ build:()=>{
   let newButton = document.createElement('div');
   let newButtonText = document.createElement('p');
   let buttonIcon = document.createElement('img');
+  newButton.id = pageState.id;
   buttonIcon.src = pageState.emoji;
   buttonIcon.className='buttonIcon';
-  defaultButtonListerner(newButton);
+  defaultButtonListerner(newButton,defaultButtons);
 
   newButton.append(buttonIcon);
   newButton.className = 'defaultButtons';
@@ -143,9 +154,28 @@ export function projectViewAllButton(projectHold){
 
 };
 
+//create pages 
+function notificationPage(){
+console.log("hey it's Zuko here");
+
+};
+
+function todayPage(){
+  console.log("hey it's Zuko here");
+  };
+
+function weekPage(){
+console.log("hey it's Zuko here");
+};
+
+function monthPage(){
+  console.log("hey it's Zuko here");
+  };
 
 
 const todos=(()=>{
   //make todos for each default button
 
 })();
+
+export {defaultButtons}

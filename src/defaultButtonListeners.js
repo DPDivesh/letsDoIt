@@ -2,12 +2,20 @@
 
 //create event listeners for other default buttons
 
-import {defaultNotifications} from "./defaultButtons";
 
-export function defaultButtonListerner(newButtonDiv,pageName){
-newButtonDiv.addEventListener('click',()=>{
-  console.log(newButtonDiv);
 
+export function defaultButtonListerner(newButtonDiv,defaultButtons){
+  
+newButtonDiv.addEventListener('click',(e)=>{
+  console.log(defaultButtons.length,'huh');
+
+  for (let i=0; i<defaultButtons.length; i++){
+
+    if( defaultButtons[i].id==newButtonDiv.id){
+      console.log(defaultButtons[i].name,'I matched');
+      defaultButtons[i].makePage();
+    }
+  }
 
 })
 
@@ -34,14 +42,21 @@ export function projectsAddListerner(elementClicked){
     let createSubmitComponent = document.createElement('div');
     createSubmitComponent.className = 'projectAdd';
     let createBackgroundComponent = document.createElement('div');
-    createBackgroundComponent.style.width='52.2vw'
+    createBackgroundComponent.style.width='10.2vw'
+    createBackgroundComponent.style.height='10.2vw'
+
     createBackgroundComponent.style.backgroundColor="#560BAD";
     let createSecondLayer = document.createElement('div');
     createBackgroundComponent.style.backgroundColor="#FFFFF";
-    let contentDocuement = document.getElementById(content)
+    let contentDocuement = document.querySelector('.mainContentContainer'
+    )
+    contentDocuement.appendChild(createSecondLayer)
+
     contentDocuement.appendChild(createSubmitComponent);
     createSubmitComponent.appendChild(createBackgroundComponent);
 
   })
 
 }
+
+
