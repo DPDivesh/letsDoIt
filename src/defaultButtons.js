@@ -162,19 +162,25 @@ export function projectViewAllButton(projectHold) {
 //create pages
 function notificationPage() {
   console.log("hey it's Zuko here");
+  document.querySelector('body').style.color='red';
   let notifArea = document.querySelector('.mainContentContainer');
 
 };
 
 function todayPage() {
+  document.querySelector('body').style.color='blue';
   console.log("hey it's Zuko here");
 };
 
 function weekPage() {
+  document.querySelector('body').style.color='orange';
+
   console.log("hey it's Zuko here");
 };
 
 function monthPage() {
+  document.querySelector('body').style.color='pink';
+
   console.log("hey it's Zuko here");
 };
 
