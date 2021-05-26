@@ -9,6 +9,14 @@ body{
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 text-indent: 1vw;}
 
+/*login style*/
+.login-style{
+
+}
+.signInButton{
+
+}
+
 /*Nav Items */
 .navContentContainer{
   flex-direction: column;

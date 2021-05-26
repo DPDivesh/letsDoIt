@@ -11,18 +11,31 @@
 </head>
 <body>
   <div id="content"></div>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/8.6.1/firebase-app.js"></script>
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/8.6.1/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDe-G2tj3zR0Vw8eMg3bR-stEWn_YpS07Y",
+    authDomain: "letsdoit-4ac13.firebaseapp.com",
+    databaseURL: "https://letsdoit-4ac13-default-rtdb.firebaseio.com",
+    projectId: "letsdoit-4ac13",
+    storageBucket: "letsdoit-4ac13.appspot.com",
+    messagingSenderId: "541358894574",
+    appId: "1:541358894574:web:af61abf09ed7b9fa4172ff"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
 
-<script src="/__/firebase/init.js"></script>
-
-<script src="./main.js"></script>
+<script src="./main.js" defer></script>
 
 </body>
 </html>
