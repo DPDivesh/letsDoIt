@@ -22,7 +22,9 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "firebase": "^8.6.2",
-    "firebase-functions": "^3.14.1"
+    "debug": "^4.3.1",
+    "firebase-admin": "^9.9.0",
+    "firebase-functions": "^3.14.1",
+    "socket.io": "^4.1.2"
   }
 }

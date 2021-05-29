@@ -13,10 +13,25 @@ const login =(()=>{
     loginCenter.append(signInButton);
     loginCenter.append(signOutButton);
     pageBody.appendChild(loginCenter);
-    signInButton.onclick = ()=> auth.signInWithPopup(provider);
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.onAuthStateChanged();
-    webPageBuilder();
+    signInButton.onclick = ()=> auth.signInWithPopup(provider);
+    signOutButton.onclick =()=>{ auth.signOut();
+      document.querySelector('.login-style').remove();
+    };
+
+    auth.onAuthStateChanged(user=>{
+      if(user){
+      console.log('welcome',user.displayName);
+      webPageBuilder();
+
+      }
+        else{
+          console.log('sucks to suc2321k')
+          
+
+        }
+      
+    });
 
   };
   return{
