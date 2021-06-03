@@ -66,8 +66,7 @@ export function projectsAddListerner(elementClicked){
 
     createInputForm.placeholder='Project Title';
     createBackgroundComponent.style.backgroundColor="#FFFFF";
-    let contentDocuement = document.querySelector('.mainContentContainer'
-    )
+    let contentDocuement = document.querySelector('.mainContentContainer');
     createBackgroundComponent.appendChild(inputFormContainer);
     inputFormContainer.appendChild(formLabel)
     inputFormContainer.appendChild(document.createElement('br'))
