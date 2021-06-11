@@ -4,9 +4,7 @@ const login =(()=>{
   const authLog = ()=>{
     const auth = firebase.auth(); 
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signOut();
 //-----------------------------
-console.log('does it work')
 let createSubmitComponent = document.createElement('div');
 createSubmitComponent.className = 'site-login';
 let createBackgroundComponent = document.createElement('div');
@@ -58,6 +56,7 @@ googButton.onclick = ()=> auth.signInWithPopup(provider);
 
       }
         else{
+          console.log('User Logged Out');
 
         }
       

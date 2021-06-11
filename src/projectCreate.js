@@ -5,12 +5,8 @@ export const createProject = (name)=>{
     name:name 
   }
   let tasks= ['test1','test2','test3'];
-  const readTasks = ()=>{
-    for(let i=0;i<tasks.length;i++){
-      console.log(tasks[i]);
-    }
-  }
-return {name,tasks, readTasks,projectPart};
+
+return {name,tasks,projectPart};
 };
 
 //whats inside projects 

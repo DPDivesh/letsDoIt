@@ -1,5 +1,6 @@
 import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth, defaultButtons} from './defaultButtons';
-
+const db = firebase.firestore();
+const auth = firebase.auth(); 
 
 export const emoji = {
   arrowExpand:'images/arrowExpand.png',
@@ -79,7 +80,29 @@ function navContainerBuilder(){
 
   function addedButtonContainerBuilder(mainContainerAppender){
     const addedButtonContainerBuilder = document.createElement('div');
-    addedButtonContainerBuilder.className=('addedButtonContainer')
+    addedButtonContainerBuilder.className=('addedButtonContainer');
+    //add users projects real time
+    console.log('live list');
+
+    let unsubscribe;
+    let projectsRef;
+    auth.onAuthStateChanged(user=>{
+      if (user){
+        unsubscribe = projectsRef
+        projectsRef= db.collection('projects')
+      .where('uid','==', user.uid)
+      // .orderBy('createdAt')
+      .onSnapshot(querySnapshot =>{
+        const projects = querySnapshot.docs.map(doc =>{
+          return `<div class=addedButtons><p>${doc.data().name}</p></div>`
+        });
+        console.log('why these tabs', projects);
+        document.querySelector('.addedButtonContainer').innerHTML=projects.join('');
+
+      });
+    }
+    });
+
     mainContainerAppender.appendChild(addedButtonContainerBuilder);
   }
 
