@@ -1,12 +1,15 @@
 
 
 export const createProject = (name)=>{
-  let projectPart ={
+  let projectParts ={
     name:name 
   }
   let tasks= ['test1','test2','test3'];
+  // const testFunciton =()=> {
+  //   console.log('hi');
+  // }
 
-return {name,tasks,projectPart};
+return {name,tasks,projectParts, };
 };
 
 //whats inside projects 
@@ -14,4 +17,5 @@ return {name,tasks,projectPart};
   //tasks go inside subcategories
   //todos go inside subcategories
 
+  //project functions 
   

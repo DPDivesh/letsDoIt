@@ -104,6 +104,7 @@ export function projectsAddListerner(elementClicked) {
         //  Projects.readTasks()
         console.log(Projects, Projects.name);
         console.log('------')
+     
         let projectsRef;
         auth.onAuthStateChanged(user => {
           if (user) {

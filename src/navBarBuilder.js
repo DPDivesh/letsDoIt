@@ -1,4 +1,5 @@
 import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth, defaultButtons} from './defaultButtons';
+import {addedButtonEventListener} from './addedButtons';
 const db = firebase.firestore();
 const auth = firebase.auth(); 
 
@@ -17,6 +18,7 @@ export function navBarBuilder(){
   //Make View All Button
   navContainerBuilder();
   buttonBuilder();
+
 }
 
 
@@ -98,12 +100,14 @@ function navContainerBuilder(){
         });
         console.log('why these tabs', projects);
         document.querySelector('.addedButtonContainer').innerHTML=projects.join('');
+        addedButtonEventListener();
+
 
       });
     }
     });
-
     mainContainerAppender.appendChild(addedButtonContainerBuilder);
+  
   }
 
 

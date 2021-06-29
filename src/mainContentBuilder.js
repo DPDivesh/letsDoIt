@@ -1,5 +1,6 @@
 //ideas
 //#1 Have the buttons have an event Listener to call each function could module pattern for security
+const db = firebase.firestore();
 
 export function mainContentBuilder(){
   //create container
@@ -34,3 +35,26 @@ function mainContainerBuilder(){
   queryBody.appendChild(toMain);
 
   }
+
+  export function addedButtonTaskView(queryValue){
+    let projectsRef;
+    let unsubscribe;
+    let mainContent = document.querySelector(".mainContentContainer");
+    mainContent.style.backgroundColor="red";
+    console.log('yoo',queryValue,firebase.auth().currentUser.uid);
+    unsubscribe = projectsRef;
+    projectsRef = db.collection('projects').where('uid','==', firebase.auth().currentUser.uid)
+    // console.log(projectsRef);
+    .onSnapshot(querySnapshot =>{
+      querySnapshot.forEach((doc)=>{
+        // console.log('echeckinnn',doc.data().name)
+        if(queryValue == doc.data().name ){
+             console.log(doc.data().name,'the doc name');
+             //in here we're gonna grab the tasks
+             // and either append them with a class and make the style 
+             //here or find a another method
+             //maybe have this whole function call a format after wiping one
+        }
+      })
+    });
+  };

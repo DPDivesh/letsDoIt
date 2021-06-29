@@ -94,12 +94,14 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-
+border: 1px thick black;
+border-radius:30px;
 }
 
 .defaultButtonContainer :hover{
 
   box-shadow: 0px 1.5px 7px 0px rgba(0, 0, 0, 0.5);
+
 
 }
 .defaultButtons  P:hover{
@@ -116,6 +118,7 @@ flex-direction: column;
   align-items: center;
   font-size: calc(17px + .5vw);
   margin-top: 1vh;
+  border-radius: 15px;
 
 
 }
@@ -137,6 +140,7 @@ flex-direction: column;
   align-items: center;
   font-size: calc(17px + .5vw);
   margin-top: 1vh;
+  border-radius:15px;
 
 
 }
