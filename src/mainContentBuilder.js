@@ -54,7 +54,31 @@ function mainContainerBuilder(){
              // and either append them with a class and make the style 
              //here or find a another method
              //maybe have this whole function call a format after wiping one
+             addedContentLayout();
+
         }
       })
     });
   };
+
+function addedContentLayout(){
+  console.log("making layout")
+createTaskSubmitCircle();
+
+}
+
+function createTaskSubmitCircle(){
+console.log('making circle');
+let mainContent = document.querySelector('mainContentContainer');
+let circle = document.createElement('div');
+circle.className='circleSubmit';
+console.log('huh')
+
+circle.addEventListener('click',()=>{console.log('circle technique')
+console.log('huh')
+})
+mainContent.append(circle);
+
+console.log(document.querySelector('.circleSubmit'))
+
+}

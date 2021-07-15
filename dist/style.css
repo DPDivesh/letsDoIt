@@ -191,12 +191,16 @@ border-radius:30px;
 
 /*Main Items*/
 .mainContentContainer{
-  width: 75vw;
+  width: 100vw;
   height:100vh;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.circleSubmit{
+color: #000;
 }
 
 /*Add Projects*/
