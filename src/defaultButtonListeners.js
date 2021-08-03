@@ -38,7 +38,7 @@ export function projectsExpandListerner(elementClicked) {
 export function projectsAddListerner(elementClicked) {
   elementClicked.addEventListener('click', () => {
     //create submit additional projects mini form
-    if (document.querySelector('.project-add') == null) {
+    if (document.querySelector('.project-add') == null && document.querySelector('.task-add') == null) {
       console.log('Add');
       let createSubmitComponent = document.createElement('div');
       createSubmitComponent.className = 'project-add';

@@ -93,7 +93,7 @@ function navContainerBuilder(){
         unsubscribe = projectsRef
         projectsRef= db.collection('projects')
       .where('uid','==', user.uid)
-      // .orderBy('createdAt')
+      .orderBy('createdAt')
       .onSnapshot(querySnapshot =>{
         const projects = querySnapshot.docs.map(doc =>{
           return `<div class=addedButtons><p>${doc.data().name}</p></div>`
@@ -104,6 +104,9 @@ function navContainerBuilder(){
 
 
       });
+    }
+    else{
+      unsubscribe && unsubscribe();
     }
     });
     mainContainerAppender.appendChild(addedButtonContainerBuilder);

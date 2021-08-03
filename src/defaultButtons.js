@@ -130,12 +130,12 @@ export function addProjects() {
   let projectsAdd = document.createElement('div');
   projectsAdd.className = ('projectsNav');
   //create close/expand tab for projects
-  const projectExpand = document.createElement('img');
-  projectExpand.src = emoji.arrowExpand;
-  projectExpand.className = 'imgExpand';
-  console.log('imma test');
-  projectsExpandListerner(projectExpand);
-  projectsAdd.appendChild(projectExpand);
+  // const projectExpand = document.createElement('img');
+  // projectExpand.src = emoji.arrowExpand;
+  // projectExpand.className = 'imgExpand';
+  // console.log('imma test');
+  // projectsExpandListerner(projectExpand);
+  // projectsAdd.appendChild(projectExpand);
   //create projects text
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";

@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 body,html{
   display:flex;
@@ -160,6 +161,12 @@ border-radius:30px;
 
 }
 
+
+/* .addedButtonContainer :active{
+  box-shadow: 0px 1.5px 7px 0px rgba(0, 0, 0, 0.5);
+
+} */
+
 .viewAllProjectsContainer{
   display: flex;
   justify-content: center;
@@ -194,23 +201,173 @@ border-radius:30px;
   width: 100vw;
   height:100vh;
   background-color: white;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.main-page-schedule{
+  width: 55vw;
+  margin: auto;
+}
+
+.main-page-schedule-title{
+  border-bottom: 1px solid;
+}
+
+input.todo-checkbox{
+  color: #B6B6B6;
+  height: 20px;
+  width: 20px;
+  margin-left: 2vw;
+
+  
+}
+/*tasks*/
+.added-tasks{
+  border-bottom: 1px solid #B6B6B6;
+  width: 40vw;
+  margin: auto;
+  display: flex;
+}
+
+.added-tasks-text{
+  font-family:  roboto;
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-left: 2.5vw;
+
+}
+.task-add{
+  background-color:hsl(268, 88%, 36%);
+  width:570px;
+  min-width: 407px;
+  height:15.2vw;
+  min-height: 280px;
+  border-radius:20px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:0px 4px 10px;
+}
+
+.task-add__innerLayer{
+  background-color:#ffffff;
+  width:550px;
+  min-width: 385px;
+  height:260px;
+  min-height: 245px;
+  border-radius:10px;
+  box-shadow:0px 4px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.input-tasks{
+  width:100%;
+  min-width: 200px;
+  min-height: 20px;
+  height:30px;
+  background-color:#EAEAEA;
+  border:none;
+  margin-right:2vw;
+  border-radius:20px;
+  margin-top: 10px;
+  text-indent: 1vw;
+  outline: none;
+
+}
+
+.submit-task{
+  font-size: 1.2rem;
+  width: 120px;
+  min-width: 100px;
+  height: 40px;
+  box-shadow: 0px 2px 2.5px 0px rgba(0, 0, 0, 0.25);
+  background-Color:#560BAD ;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+.submit-task:hover{
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.task-button-holder{
+  display: flex;
+  margin-left: 70px;
+  margin-top: 120px;
+  
+  }
+
+
 .circleSubmit{
-color: #000;
+border: 2px solid #C4C4C4;
+	background-color:hsl(268, 88%, 36%);;
+	font-size: 22px;
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 999px;
+	position: fixed;
+  bottom: 5%;
+  right: 5%;
+
+}
+.circleSubmit:after,
+.circleSubmit:before {
+  content: "";
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circleSubmit:before {
+  height: 1em;
+  width: 0.2em;
+  box-shadow:0px 4px 10px;
+
+}
+
+.circleSubmit:after {
+  height: 0.2em;
+  width: 1em;
+}
+
+.circleSubmit:hover{
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);  
+
+}
+
+.page-header{
+  border-bottom: 1px solid;
+  width: 70vw;
+  margin: auto;
+  margin-bottom: 7vh;
+}
+
+.page-header-text{
+  margin-left: 5vw;
+
+  position:relative;
+  top: 1vw;
 }
 
 /*Add Projects*/
 .project-add{
   background-color:hsl(268, 88%, 36%);
-  width:30.2vw;
+  width:570px;
   min-width: 407px;
   height:15.2vw;
   min-height: 280px;
   border-radius:20px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
   display:flex;
   justify-content: center;
   align-items: center;
@@ -219,9 +376,9 @@ color: #000;
 
 .project-add__innerLayer{
   background-color:#ffffff;
-  width:28.2vw;
+  width:550px;
   min-width: 385px;
-  height:14.2vw;
+  height:260px;
   min-height: 245px;
   border-radius:10px;
   box-shadow:0px 4px 10px;
@@ -230,10 +387,10 @@ color: #000;
 }
 
 .form-container{
-  width: 20vw;
+  width: 400px;
   min-width: 200px;
   margin-left: 50px;
-  margin-top: 3%;
+  margin-top: 7px;
 }
  .form-group{
   font-size:1.4rem;
@@ -243,12 +400,12 @@ color: #000;
   width:100%;
   min-width: 200px;
   min-height: 20px;
-  height:4.5vh;
+  height:30px;
   background-color:#EAEAEA;
   border:none;
   margin-right:2vw;
   border-radius:20px;
-  margin-top: 2vh;
+  margin-top: 10px;
   text-indent: 1vw;
   outline: none;
 
@@ -291,9 +448,10 @@ color: #000;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);  
 }
 .project-button-holder{
-display: flex;
-margin-left: 10%;
-margin-top: 35%;
+  display: flex;
+  margin-left: 70px;
+  margin-top: 120px;
+  
 
 }
 
