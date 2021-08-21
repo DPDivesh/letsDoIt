@@ -225,8 +225,9 @@ input.todo-checkbox{
 /*tasks*/
 .added-tasks{
   border-bottom: 1px solid #B6B6B6;
-  width: 40vw;
+  width: 50vw;
   margin: auto;
+  margin-top: 2vh;
   display: flex;
 }
 
@@ -246,6 +247,7 @@ input.todo-checkbox{
   border-radius:20px;
   position: relative;
   left: 50%;
+  bottom:50%;
   transform: translate(-50%, 0);
   display:flex;
   justify-content: center;
@@ -278,6 +280,10 @@ input.todo-checkbox{
   outline: none;
 
 }
+.date-picker{
+  margin-left: 5%;
+  margin-top: 5%;
+}
 
 .submit-task{
   font-size: 1.2rem;
@@ -297,11 +303,51 @@ input.todo-checkbox{
 
 .task-button-holder{
   display: flex;
-  margin-left: 70px;
-  margin-top: 120px;
-  
+  position: relative;
+  top: 50%;
+  left: 15%;
   }
 
+  .drop-down{
+    position: relative;
+    display: inline-block;
+    top:35%;
+    right:36%;
+  }
+
+  .input-dropdown{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .input-dropdown p{
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .drop-down:hover .input-dropdown{
+    display: block;
+
+  }
+
+  .input-dropdown p:hover {
+    background-color: #f1f1f1;
+  }
+
+  .priority-one{
+    color: #780000;;
+  }
+  .priority-two{
+    color:#BDAA01 ;
+  }
+  .priority-three{
+    color: #097200;
+  }
 
 .circleSubmit{
 border: 2px solid #C4C4C4;

@@ -2,24 +2,19 @@ const db = firebase.firestore();
 const {serverTimestamp} = firebase.firestore.FieldValue;
 
 export const createProject = (name)=>{
-  let projectParts ={
-    name:name
-    }
+
   let tasks= [];
   // const testFunciton =()=> {
   //   console.log('hi');
   // }
 
-return {name,tasks,projectParts, };
+return {name,tasks, };
 };
 
-export const createTask = (name)=>{
-  let tasks= [];
-  // const testFunciton =()=> {
-  //   console.log('hi');
-  // }
-
-return {name,tasks,projectParts, };
+export function createTask(taskName,taskRef){
+  db.collection('projects').doc(taskRef).update({
+    'project.tasks':firebase.firestore.FieldValue.arrayUnion(taskName)
+  });
  
 };
 
