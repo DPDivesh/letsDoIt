@@ -1,6 +1,7 @@
-import {
-  createProject
-} from './projectCreate.js';
+import {createProject} from './projectCreate.js';
+
+// import { doc, setDoc } from firebase.firestore; 
+
 //create event listeners for other default buttons
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -108,19 +109,19 @@ export function projectsAddListerner(elementClicked) {
         let projectsRef;
         auth.onAuthStateChanged(user => {
           if (user) {
-            projectsRef = db.collection('projects')
+            projectsRef = db.collection('users')
             const {
               serverTimestamp
             } = firebase.firestore.FieldValue;
 
-            projectsRef.add({
+             setDoc(doc(db,'users',"sdasdasdas"),{
               uid: user.uid,
               userName: user.displayName,
               project: Projects,
               name: Projects.name,
               createdAt: serverTimestamp()
 
-            })
+            });
             console.log('working?')
 
           } else {

@@ -66,7 +66,7 @@ z
     tasksRef = projectsRef.where('name','==',document.title).orderBy('createdAt')
     // tasksRef =  projectsRef.doc.data().tasks;
     // console.log(projectsRef);
-    .onSnapshot(querySnapshot =>{
+    tasksRef.onSnapshot(querySnapshot =>{
              let task = querySnapshot.docs.map(doc =>{
                console.log(doc.data().project.tasks.length,'length');
               //work this out 
@@ -235,6 +235,7 @@ console.log(taskName);
     projectsRef = db.collection('projects').where('uid','==', firebase.auth().currentUser.uid)
     tasksRef = projectsRef.where('name','==',document.title).orderBy('createdAt');
     // tasksRef =  projectsRef.doc.data().tasks;
+    console.log(tasksRef.name)
     console.log('reference point')
     tasksRef.get().then((snapshot)=>{
       snapshot.docs.forEach(doc => {
