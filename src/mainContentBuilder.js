@@ -1,6 +1,7 @@
 import { id } from "date-fns/locale";
 import { createTask } from "./projectCreate";
 const {serverTimestamp} = firebase.firestore.FieldValue;
+import { signOut } from "./defaultButtons";
 
 //ideas
 //#1 Have the buttons have an event Listener to call each function could module pattern for security
@@ -37,8 +38,20 @@ function mainContainerBuilder(){
   const toMain =document.createElement('div');
   toMain.className = 'mainContentContainer';
   queryBody.appendChild(toMain);
-z
+
+  signOutButtonContainer(toMain);
+  const signOutContainer = document.querySelector('.signOutContainer');
+  signOut(signOutContainer);
+
   }
+
+  function signOutButtonContainer(mainContainerAppender){
+    const signOutButton = document.createElement('div');
+    signOutButton.className='signOutContainer';
+    mainContainerAppender.appendChild(signOutButton);
+
+  };
+
 
   export function addedButtonTaskView(queryValue){
     let tasksRef;

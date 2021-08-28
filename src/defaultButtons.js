@@ -159,6 +159,25 @@ export function projectViewAllButton(projectHold) {
 
 };
 
+export function signOut(signOutHold){
+  const signOutContainer = document.createElement('input');
+  signOutContainer.type = 'submit';
+  signOutContainer.value = 'Sign Out';
+  signOutContainer.className = 'signOut';
+  signOutContainer.addEventListener('click',()=>{
+    document.querySelector('.navContentContainer').remove();
+    document.querySelector('.mainContentContainer').remove();
+    
+    firebase.auth().signOut().then(()=>{
+      console.log('sign out Successful');
+    })
+    .catch((error)=>{
+      console.log('Log Out Failed');
+    })
+  })
+  signOutHold.appendChild(signOutContainer);
+}
+
 //create pages
 function notificationPage() {
   console.log("hey it's Zuko here");

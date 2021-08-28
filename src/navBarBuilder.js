@@ -1,4 +1,4 @@
-import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth, defaultButtons} from './defaultButtons';
+import {addProjects,projectViewAllButton,defaultNotifications,defaultToday,defaultWeek,defaultMonth, defaultButtons, signOut} from './defaultButtons';
 import {addedButtonEventListener} from './addedButtons';
 const db = firebase.firestore();
 const auth = firebase.auth(); 
