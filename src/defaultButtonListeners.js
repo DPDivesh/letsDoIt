@@ -114,13 +114,8 @@ export function projectsAddListerner(elementClicked) {
               serverTimestamp
             } = firebase.firestore.FieldValue;
 
-             setDoc(doc(db,'users',"sdasdasdas"),{
-              uid: user.uid,
-              userName: user.displayName,
-              project: Projects,
-              name: Projects.name,
-              createdAt: serverTimestamp()
-
+            db.collection('users').doc(user.uid).update({
+              project: firebase.firestore.FieldValue.arrayUnion(Projects)    
             });
             console.log('working?')
 

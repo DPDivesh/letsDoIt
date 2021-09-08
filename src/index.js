@@ -51,10 +51,11 @@ const login =(()=>{
               const {serverTimestamp
               } = firebase.firestore.FieldValue;
         
-                db.collection('users').doc(user.id).set({
-                  uid: user.uid,
-                  userName: user.displayName,
-                  email: user.email,
+                db.collection('users').doc(result.user.uid).set({
+                  uid: result.user.uid,
+                  userName: result.user.displayName,
+                  email: result.user.email,
+                  project:[],
                   createdAt: serverTimestamp()
         
                 })}

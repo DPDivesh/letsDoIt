@@ -2,7 +2,7 @@ const db = firebase.firestore();
 const {serverTimestamp} = firebase.firestore.FieldValue;
 
 export const createProject = (name)=>{
-
+  let projectName = name;
   let tasks= [];
   // const testFunciton =()=> {
   //   console.log('hi');
