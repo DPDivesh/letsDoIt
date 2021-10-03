@@ -6,6 +6,7 @@ import { signOut } from "./defaultButtons";
 //ideas
 //#1 Have the buttons have an event Listener to call each function could module pattern for security
 const db = firebase.firestore();
+const auth = firebase.auth(); 
 
 export function mainContentBuilder(){
   //create container
@@ -245,18 +246,28 @@ console.log(taskName);
     let projectsRef;
     unsubscribe = tasksRef;
 
-    projectsRef = db.collection('projects').where('uid','==', firebase.auth().currentUser.uid)
-    tasksRef = projectsRef.where('name','==',document.title).orderBy('createdAt');
-    // tasksRef =  projectsRef.doc.data().tasks;
-    console.log(tasksRef.name)
-    console.log('reference point')
-    tasksRef.get().then((snapshot)=>{
-      snapshot.docs.forEach(doc => {
-        console.log(doc.id,'data')
-        createTask(taskName,doc.id);
+    tasksRef = db.collection('users').where('uid','==', firebase.auth().currentUser.uid)
+    
+ tasksRef
+  .get()
+  .then((querySnapshot)=>{
+    querySnapshot.forEach((doc)=>{
+      console.log(doc.data(),'dfsdfds');
+      let projectName = document.querySelector('.page-header-text')
+      createTask(taskName,tasksRef,projectName);
 
-      })
     })
+  })
+    // tasksRef =  projectsRef.doc.data().tasks;
+    // console.log('reference points',tasksRef.name)
+
+    // tasksRef.get().then((snapshot)=>{
+    //   snapshot.docs.forEach(doc => {
+    //     console.log(doc.uid,'data')
+        // createTask(taskName,doc.uid);
+
+    //   })
+    // })
 
 //redo structure of db users 
 

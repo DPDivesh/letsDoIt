@@ -88,22 +88,27 @@ function navContainerBuilder(){
 
     let unsubscribe;
     let projectsRef;
+    let projects;
     auth.onAuthStateChanged(user=>{
       if (user){
         unsubscribe = projectsRef
         projectsRef= db.collection('users').where('uid','==', user.uid).onSnapshot(querySnapshot =>{
-        const projects = querySnapshot.docs.map(doc =>{
+        querySnapshot.docs.map(doc =>{
           console.log(doc.data(),'sadasd');
-          // doc.data().project.map(projects => {
-          //   console.log(projects,'ssss');
-          //   return `<div class=addedButtons><p>${projects.name}</p></div>`;
+        projects=doc.data().project.map(projects => {
+            console.log(projects.name,'ssss');
+            console.log(projects);
+            return projects=`<div class=addedButtons><p>${projects.name}</p></div>`;
             
-          // });
-          return `<div class=addedButtons><p>${doc.data().project[0].name}</p></div>`
+          });
+          // return `<div class=addedButtons><p>${doc.data().project[0].name}</p></div>`
+          return projects;
 
+     
         });
         console.log('why these tabss', projects);
         document.querySelector('.addedButtonContainer').innerHTML=projects.join('');
+        
         console.log('testing project list')
         addedButtonEventListener();
 

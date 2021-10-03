@@ -11,9 +11,10 @@ export const createProject = (name)=>{
 return {name,tasks, };
 };
 
-export function createTask(taskName,taskRef){
-  db.collection('projects').doc(taskRef).update({
-    'project.tasks':firebase.firestore.FieldValue.arrayUnion(taskName)
+export function createTask(taskName,taskRef,projectName){
+ let index = taskRef.project.findIndex(projectName);
+  db.collection('users').doc(taskRef).update({
+    ['project[`${index}`].name']:firebase.firestore.FieldValue.arrayUnion(taskName)
   });
  
 };
