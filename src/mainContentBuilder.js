@@ -61,7 +61,7 @@ function mainContainerBuilder(){
     let mainContent = document.querySelector(".mainContentContainer");
     console.log('yoo',queryValue,firebase.auth().currentUser.uid);
     unsubscribe = tasksRef;
-    projectsRef = db.collection('projects').where('uid','==', firebase.auth().currentUser.uid)
+    projectsRef = db.collection('users').where('uid','==', firebase.auth().currentUser.uid)
     //in here we're gonna grab the tasks
     // and either append them with a class and make the style 
     //here or find a another method
@@ -89,7 +89,7 @@ function mainContainerBuilder(){
               for(let i=0; i<doc.data().project.tasks.length;i++){
                 taskHolder.push(
               `<div class="added-tasks" data-id=${doc.id}><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text">${doc.data().project.tasks[i]}</label></div>`)
-              console.log(taskHolder);
+              console.log(taskHolder,'taskholder');
               if(taskHolder.length==doc.data().project.tasks.length){
                 console.log(taskHolder);
                 return taskHolder.join('   ');
@@ -245,16 +245,17 @@ console.log(taskName);
     let unsubscribe;
     let projectsRef;
     unsubscribe = tasksRef;
+    let projectName = document.querySelector('.page-header-text')
 
     tasksRef = db.collection('users').where('uid','==', firebase.auth().currentUser.uid)
-    
  tasksRef
   .get()
   .then((querySnapshot)=>{
     querySnapshot.forEach((doc)=>{
-      console.log(doc.data(),'dfsdfds');
-      let projectName = document.querySelector('.page-header-text')
-      createTask(taskName,tasksRef,projectName);
+      console.log(doc.data().project,'dfsdfds');
+      let taskAdd = doc.data().project;
+      console.log(taskAdd,'taskAdd');
+      createTask(taskName,taskAdd,projectName.innerHTML,tasksRef);
 
     })
   })
