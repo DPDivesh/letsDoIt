@@ -15,40 +15,26 @@ return {name,tasks, };
 
   const updateProject = (name,taskName)=>{
     console.log("update project start")
-  let projectName = name;
   let tasks= [];
-  // let projectsRef;
+  let projectsRef;
   // // let tasksRef;
-  let uid;
-  getUserId(uid);
-  console.log(uid,'uid');
-  //   projectsRef =  db.collection('users').where('uid','==', firebase.auth().currentUser.uid)
-    // tasksRef = projectsRef.where('name','==',document.title).orderBy('createdAt')
-    // tasksRef =  projectsRef.doc.data().tasks;
+  // let uid;
+  // uid = getUserId(uid);
+    projectsRef =  db.collection('users').doc(firebase.auth().currentUser.uid);
+   console.log(taskName,'tasknameeee', name,'nameeee')
+    projectsRef.get().then((doc) =>{
+    let indexVal = doc.data().project.findIndex(element=>element.name == name)
+    console.log(indexVal);
+      console.log(doc.data().project[indexVal].tasks,'nameee');
+      //https://fireship.io/snippets/read-a-single-firestore-document/
+      // console.log(doc.data());
+      // doc.data().project[indexVal].tasks.push(taskName);
+      db.collection('users').doc(firebase.auth().currentUser.uid).update("project",firebase.firestore.FieldValue.arrayUnion());
+      doc.data().project[indexVal].tasks.set({
+        task:taskName
+      }, {merge:true})
 
-   
-    // projectsRef.get().then((doc) =>{
-    //   console.log(doc[0].data(),'name');
-    //   //https://fireship.io/snippets/read-a-single-firestore-document/
-    //   // console.log(doc.data());
-    //     let task = querySnapshot.docs.map(doc =>{
-    //       console.log(doc.data(),'length');
-    //      //work this out 
-    //      //maybe send this to a function to build and loop through array
-    //      let taskHolder =[]
-    //      for(let i=0; i<doc.data().project.tasks.length;i++){
-    //      console.log(taskHolder,'taskholder');
-    //      if(taskHolder.length==doc.data().project.tasks.length){
-    //        console.log(taskHolder);
-    //        return taskHolder.join('   ');
-    //      }
-
-    //      }
-     
-    //    }); 
-
-    //       })
-  tasks.push(taskName);
+          })
   // const testFunciton =()=> {
   //   console.log('hi');
   // }
@@ -56,29 +42,32 @@ return {name,tasks, };
 return {name,tasks, };
 };
 
-async function getUserId(uid){
-  const projectsRef = await db.collection('users').where('uid','==', firebase.auth().currentUser.uid).get();
-console.log('projkekdkd');
-  if (!projectsRef.empty){
-    const snapshot = projectsRef.docs[0];
-    const data = snapshot.data();
-    console.log(data.uidt);
-    uid = data;
-    return uid;
-  }
-  else{
-    console.log('not found')
-  }
+// async function getUserId(uid){
+//   console.log("promise?")
+//   const projectsRef = await db.collection('users').where('uid','==', firebase.auth().currentUser.uid).get();
+// console.log('projkekdkd');
+//   if (!projectsRef.empty){
+//     const snapshot = projectsRef.docs[0];
+//     const data = snapshot.data();
+//     console.log(data.uid);
+//     uid = data;
+//     return uid;
+//   }
+//   else{
+//     console.log('not found')
+//   }
 
-}
+// }
 
 export function createTask(taskName,taskRef,projectName,taskDoc){
   console.log("update Project")
 //  let index = taskRef.findIndex(tasks=> tasks===`[${projectName}]`);
  
-  db.collection('users').doc('sovU3DmGyLVxvInHjJp5N5L7Wkj1'
-    ).update("project",firebase.firestore.FieldValue.arrayUnion(updateProject(projectName,taskName)));
- 
+  // db.collection('users').doc(firebase.auth().currentUser.uid
+  //   ).update("project",firebase.firestore.FieldValue.arrayUnion());
+ //using this function and manually updating vs using built in array union
+ //allows there to be multiples 
+  updateProject(projectName,taskName);
 };
 
 

@@ -198,7 +198,7 @@ function createInputForm(){
   createInputFormTitle.className = 'input-tasks';
   createInputFormTitle.type = 'text';
   createInputFormTitle.required = true;
-  createInputFormTitle.pattern = "^[a-zA-Z]{3,10}$";
+  createInputFormTitle.pattern = "^[a-zA-Z]{1,}$";
   createInputFormTitle.id = 'taskName'
 
   createInputFormTitle.placeholder = 'Task Title';
