@@ -30,10 +30,10 @@ return {name,tasks, };
       // console.log(doc.data());
       // doc.data().project[indexVal].tasks.push(taskName);
       db.collection('users').doc(firebase.auth().currentUser.uid).update("project",firebase.firestore.FieldValue.arrayUnion());
-      doc.data().project[indexVal].tasks.set({
-        task:taskName
-      }, {merge:true})
-
+      // doc.data().project[indexVal].tasks.set({
+      //   task:taskName
+      // }, {merge:true})
+    
           })
   // const testFunciton =()=> {
   //   console.log('hi');

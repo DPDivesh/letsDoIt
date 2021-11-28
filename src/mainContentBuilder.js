@@ -166,16 +166,21 @@ function createInputForm(){
   let createInputFormDatePickerLabel = document.createElement('label');
   let createInputFormPriorityDropDown = document.createElement('div');
   createInputFormPriorityDropDown.className='drop-down';
+  createInputFormPriorityDropDown.id='drop-down';
   let createInputFormPriorityDropDownSpan = document.createElement('span');
   createInputFormPriorityDropDownSpan.innerHTML = 'Priority';  
+  createInputFormPriorityDropDownSpan.id='drop-down-priority';
   let createInputFormPriority = document.createElement('div');
   createInputFormPriority.className='input-dropdown'
   let createInputFormPriorityText1 = document.createElement('p');
   let createInputFormPriorityText2 = document.createElement('p');
   let createInputFormPriorityText3 = document.createElement('p');
   createInputFormPriorityText1.innerHTML = 'Priority 1';
+  createInputFormPriorityText1.setAttribute('data-priority',1);
   createInputFormPriorityText2.innerHTML = 'Priority 2';
+  createInputFormPriorityText2.setAttribute('data-priority',2);
   createInputFormPriorityText3.innerHTML = 'Priority 3';
+  createInputFormPriorityText3.setAttribute('data-priority',3);
   createInputFormPriorityText1.className='priority-one';
   createInputFormPriorityText2.className='priority-two';
   createInputFormPriorityText3.className='priority-three';
@@ -224,8 +229,11 @@ function createInputForm(){
   inputFormContainer.addEventListener('submit', (e) => {
 
     e.preventDefault();
-
+    console.log(e,'e values')
     let taskName = document.getElementById('taskName').value;
+    let priorityLevel = document.getElementById('drop-down-priority');
+    console.log(priorityLevel);
+    console.log(priorityLevel.dataset.priority,'priorityyyy Levelll')
     taskName = taskName.toLowerCase();
     console.log(taskName);
     const titleCase = taskName.split(" ");
@@ -255,7 +263,7 @@ console.log(taskName);
       console.log(doc.data().project,'dfsdfds');
       let taskAdd = doc.data().project;
       console.log(taskAdd,'taskAdd');
-      createTask(taskName,taskAdd,projectName.innerHTML,tasksRef);
+      createTask(taskName,taskAdd,projectName.innerHTML,tasksRef,priorityLevel);
 
     })
   })
@@ -347,17 +355,23 @@ function exitForm() {
 
 function priorityPick(pOne,pTwo,pThree,spanChange){
   pOne.addEventListener('click',()=>{
-    spanChange.innerHTML="Priority 1"
+    spanChange.innerHTML=pOne.innerHTML;
     spanChange.style.color='#780000'
+    spanChange.id=spanChange.id;
+    spanChange.setAttribute('data-priority',1);
   })
   
   pTwo.addEventListener('click',()=>{
     spanChange.innerHTML="Priority 2"
     spanChange.style.color='#BDAA01'
+    spanChange.id=spanChange.id;
+    spanChange.setAttribute('data-priority',2);
   })
   
   pThree.addEventListener('click',()=>{
     spanChange.innerHTML="Priority 3"
     spanChange.style.color='#097200'
+    spanChange.id=spanChange.id;
+    spanChange.setAttribute('data-priority',3);
   })
 }
