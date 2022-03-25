@@ -4,8 +4,16 @@ import {
 import {
   projectsExpandListerner,
   projectsAddListerner,
-  defaultButtonListerner
+  defaultButtonListener
 } from './defaultButtonListeners';
+import{allContentErase, mainContentErase} from './addedButtons'
+import { defaultButtonTaskView, mainContentBuilder } from './mainContentBuilder';
+import {
+  editButtonEventListener,
+  trashButtonEventListener,checkMarkEventListener
+} from "./addedButtons";
+const db = firebase.firestore();
+const auth = firebase.auth();
 //Notification
 //Today
 //This week
@@ -22,8 +30,6 @@ export const defaultNotifications = () => {
 
   let objectFunctions = {
     makePage: () => {
-      console.log("Notifications Page");
-      notificationPage();
     }
   }
   return Object.assign({},
@@ -32,16 +38,14 @@ export const defaultNotifications = () => {
 
 }
 
-export const defaultToday = (name) => {
+export const defaultCompleted = (name) => {
   let pageState = {
-    name: "Today",
+    name: "Completed",
     emoji: emoji.Today,
-    id: 'TodayPage'
+    id: 'completedTasks'
   }
   let objectFunctions = {
     makePage: () => {
-      console.log("Today Page");
-      todayPage();
 
     }
   }
@@ -58,8 +62,6 @@ export const defaultWeek = () => {
   }
   let objectFunctions = {
     makePage: () => {
-      console.log("Week Page");
-      weekPage();
     }
   }
   return Object.assign({},
@@ -76,8 +78,6 @@ export const defaultMonth = () => {
   }
   let objectFunctions = {
     makePage: () => {
-      console.log("Month Page");
-      monthPage();
     }
   }
   return Object.assign({},
@@ -96,7 +96,6 @@ export const defaultMonth = () => {
 const createButton = (pageState) => ({
 
   build: () => {
-    console.log(pageState.name + "hi")
     let buttonLocation = document.querySelector('.defaultButtonContainer');
     let newButton = document.createElement('div');
     let newButtonText = document.createElement('p');
@@ -104,23 +103,101 @@ const createButton = (pageState) => ({
     newButton.id = pageState.id;
     buttonIcon.src = pageState.emoji;
     buttonIcon.className = 'buttonIcon';
-    defaultButtonListerner(newButton, defaultButtons);
+    defaultButtonListener(newButton);
 
     newButton.append(buttonIcon);
     newButton.className = 'defaultButtons';
-    console.log(buttonLocation);
     buttonIcon.style.marginLeft = '12%';
     newButtonText.innerHTML = pageState.name;
+    newButtonText.id="titleText"
     newButton.append(newButtonText);
     buttonLocation.appendChild(newButton);
-    console.log(buttonLocation, 'hi');
 
 
   }
 
 })
 
+export const defaultButtonPageBuilders=(()=>{
+  const notificationPage = () =>{
+    console.log('hi')
+    let tasksRef;
+    tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects");
 
+    let allProjects = [];
+   
+
+    tasksRef.get()
+    .then((querySnapshot)=>{
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+      allProjects.push(doc.data());
+      console.log(allProjects)
+    
+      
+  
+      })
+
+
+    })
+
+    tasksRef.orderBy('tasks.date').onSnapshot(querySnapshot => {
+      let taskHolder = []
+      let mainPageScheduleList = document.querySelector('.main-page-schedule-list');
+      let wipe = document.querySelector('.main-page-schedule-list');
+      //remove children, starts clean slate 
+      if (wipe.firstChild != null) {
+        while (wipe.firstChild) {
+          wipe.removeChild(wipe.firstChild);
+        }
+      }
+  
+      //map it all like you mapped the docs for projects
+  
+      querySnapshot.docs.map(doc => {
+        console.log(doc.data());
+        taskHolder.push(
+          `<div class="added-tasks" data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+                </div></div>
+                <div class='deadline-date'><label>${doc.data().tasks.date}</label>
+                </div>
+              </div>`)
+        //let the color of the date equal the priority 
+  
+      });
+      //in here we're gonna grab the tasks
+      // and either append them with a class and make the style 
+      //here or find a another method
+      //maybe have this whole function call a format after wiping one
+  
+  
+  
+      mainPageScheduleList.innerHTML = taskHolder.join('');
+      editButtonEventListener();
+      trashButtonEventListener();
+      checkMarkEventListener();
+  
+  
+    });
+  };
+
+  const thisWeekPage = () =>{
+
+  };
+
+  const thisMonthPage = () =>{
+
+  };
+
+  const completedTasks = () =>{
+
+  };
+
+
+  return {
+    notificationPage,thisWeekPage,thisMonthPage,completedTasks
+  }
+})();
 
 
 
@@ -129,14 +206,7 @@ export function addProjects() {
   const queryNav = document.querySelector('.navContentContainer');
   let projectsAdd = document.createElement('div');
   projectsAdd.className = ('projectsNav');
-  //create close/expand tab for projects
-  // const projectExpand = document.createElement('img');
-  // projectExpand.src = emoji.arrowExpand;
-  // projectExpand.className = 'imgExpand';
-  // console.log('imma test');
-  // projectsExpandListerner(projectExpand);
-  // projectsAdd.appendChild(projectExpand);
-  //create projects text
+
   let projectsText = document.createElement('p');
   projectsText.innerHTML = "Projects";
   projectsAdd.appendChild(projectsText);
@@ -149,15 +219,7 @@ export function addProjects() {
   projectsAdd.appendChild(buttonExpandIcon);
 }
 
-export function projectViewAllButton(projectHold) {
-  const projectViewAll = document.createElement('input');
-  projectViewAll.type = 'submit';
-  projectViewAll.value = 'View All Projects';
-  projectViewAll.className = 'viewAllProjectsButton';
-  projectHold.appendChild(projectViewAll);
 
-
-};
 
 export function signOut(signOutHold){
   const signOutContainer = document.createElement('input');
@@ -165,43 +227,17 @@ export function signOut(signOutHold){
   signOutContainer.value = 'Sign Out';
   signOutContainer.className = 'signOut';
   signOutContainer.addEventListener('click',()=>{
-    document.querySelector('.navContentContainer').remove();
-    document.querySelector('.mainContentContainer').remove();
-    
+   allContentErase();
     firebase.auth().signOut().then(()=>{
-      console.log('sign out Successful');
     })
     .catch((error)=>{
-      console.log('Log Out Failed');
     })
   })
   signOutHold.appendChild(signOutContainer);
 }
 
 //create pages
-function notificationPage() {
-  console.log("hey it's Zuko here");
-  document.querySelector('body').style.color='red';
-  let notifArea = document.querySelector('.mainContentContainer');
 
-};
-
-function todayPage() {
-  document.querySelector('body').style.color='blue';
-  console.log("hey it's Zuko here");
-};
-
-function weekPage() {
-  document.querySelector('body').style.color='orange';
-
-  console.log("hey it's Zuko here");
-};
-
-function monthPage() {
-  document.querySelector('body').style.color='pink';
-
-  console.log("hey it's Zuko here");
-};
 
 
 const todos = (() => {

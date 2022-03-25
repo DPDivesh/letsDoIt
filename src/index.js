@@ -1,4 +1,5 @@
-import { defaultButtonListerner } from './defaultButtonListeners';
+import { allContentErase, mainContentErase } from './addedButtons';
+import { defaultButtonListener } from './defaultButtonListeners';
 
 import {webPageBuilder} from './webPageBuilder';
 const db = firebase.firestore();
@@ -10,8 +11,7 @@ const login =(()=>{
     auth.onAuthStateChanged(user=>{
    
       if(user){
-        console.log('welcome',user.displayName);
-        // document.querySelector('.site-login').remove();
+
   
         webPageBuilder();
       
@@ -43,10 +43,9 @@ const login =(()=>{
           createSubmitComponent.appendChild(createBackgroundComponent);
           let signInInnerLayer = document.querySelector('.site-login_innerLayer');
 
-          console.log(googleSignIn);
           signInInnerLayer.append(googleSignIn);
           googButton.onclick = ()=>{ auth.signInWithPopup(provider).then((result)=>{
-            console.log(result.additionalUserInfo.isNewUser);
+            allContentErase();
             if(result.additionalUserInfo.isNewUser == true){
               const {serverTimestamp
               } = firebase.firestore.FieldValue;
@@ -60,7 +59,8 @@ const login =(()=>{
         
                 })}
                 else{
-                  document.querySelector('.site-login').remove();
+                  allContentErase();
+
                 }
           });
           

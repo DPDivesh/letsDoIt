@@ -1,23 +1,43 @@
-import {createProject} from './projectCreate.js';
+import { mainContentErase } from './addedButtons.js';
+import { defaultButtonPageBuilders } from './defaultButtons.js';
+import { defaultButtonTaskView, mainContentBuilder } from './mainContentBuilder.js';
+import {
+  createProject
+} from './projectCreate.js';
 
 // import { doc, setDoc } from firebase.firestore; 
 
 //create event listeners for other default buttons
 const db = firebase.firestore();
 const auth = firebase.auth();
-export function defaultButtonListerner(newButtonDiv, defaultButtons) {
 
+export function defaultButtonListener(newButtonDiv) {
   newButtonDiv.addEventListener('click', (e) => {
-    console.log(defaultButtons.length, 'huh');
+    console.log(e.target.textContent);
+    document.title =e.target.textContent
 
-    for (let i = 0; i < defaultButtons.length; i++) {
+    mainContentErase();
+    mainContentBuilder();
+   defaultButtonTaskView(e.target.textContent);
+   switch (e.target.textContent) {
+     case "Notifications":
+       defaultButtonPageBuilders.notificationPage();
+       break;
+     case "weekPage":
+      defaultButtonPageBuilders.thisWeekPage();
 
-      if (defaultButtons[i].id == newButtonDiv.id) {
-        console.log(defaultButtons[i].name, 'I matched');
-        defaultButtons[i].makePage();
-      }
-    }
+       break;
+       case "monthPage":
+        defaultButtonPageBuilders.thisMonthPage();
 
+       break;
+       case "completedTasks":
+        defaultButtonPageBuilders.completedTasks();
+        break;
+       
+     default:
+       break;
+   }
   })
 
 
@@ -31,7 +51,6 @@ export function projectsExpandListerner(elementClicked) {
   elementClicked.addEventListener('click', () => {
     //change state of content
     //add animation
-    console.log('Expand');
   })
 
 }
@@ -40,7 +59,6 @@ export function projectsAddListerner(elementClicked) {
   elementClicked.addEventListener('click', () => {
     //create submit additional projects mini form
     if (document.querySelector('.project-add') == null && document.querySelector('.task-add') == null) {
-      console.log('Add');
       let createSubmitComponent = document.createElement('div');
       createSubmitComponent.className = 'project-add';
       let createBackgroundComponent = document.createElement('div');
@@ -62,7 +80,7 @@ export function projectsAddListerner(elementClicked) {
       createInputForm.className = 'input-projects';
       createInputForm.type = 'text';
       createInputForm.required = true;
-      createInputForm.pattern = "^[a-zA-Z]{3,10}+$";
+      createInputForm.pattern = '^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$';
       createInputForm.id = 'projectName'
 
       createInputForm.placeholder = 'Project Title';
@@ -87,10 +105,8 @@ export function projectsAddListerner(elementClicked) {
 
         let projectName = document.getElementById('projectName').value;
         projectName = projectName.toLowerCase();
-        console.log(projectName);
         const titleCase = projectName.split(" ");
-        //  console.log(titleCase[0].charAt(0).toUpperCase(),"test");
-        // console.log(titleCase,"???");
+
         for (let i = 0; i < titleCase.length; i++) {
 
           titleCase[i] = titleCase[i].charAt(0).toUpperCase() + titleCase[i].slice(1);
@@ -101,11 +117,9 @@ export function projectsAddListerner(elementClicked) {
         projectName = titleCase.join(" ");
 
         let Projects = createProject(projectName);
-        console.log('------')
+        // Projects.collection('sdasds').doc('message');
         //  Projects.readTasks()
-        console.log(Projects, Projects.name);
-        console.log('------')
-     
+
         let projectsRef;
         auth.onAuthStateChanged(user => {
           if (user) {
@@ -114,20 +128,17 @@ export function projectsAddListerner(elementClicked) {
               serverTimestamp
             } = firebase.firestore.FieldValue;
 
-            db.collection('users').doc(user.uid).update({
-              project: firebase.firestore.FieldValue.arrayUnion(Projects)    
+            db.collection('users').doc(user.uid).collection("projects").doc(Projects.name).set({
+              project: Projects
             });
-            console.log('working?')
 
           } else {
-            console.log('User Logged Out');
 
           }
 
         });
 
         exitForm();
-        // console.log('hidasdas',document.getElementById('projectName').value)
       })
       //cancel event listener 
       cancelButton.addEventListener('click', (e) => {

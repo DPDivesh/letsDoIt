@@ -18,6 +18,10 @@ text-indent: 1vw;}
 
 }
 
+.signOut:hover{
+  cursor: pointer;
+}
+
 /*Nav Items */
 .navContentContainer{
   flex-direction: column;
@@ -85,6 +89,31 @@ text-indent: 1vw;}
 
 }
 
+.taskbar-options{
+display: flex;
+height: 5.5vh;
+} 
+
+.task-selection{
+width: 50%;
+}
+
+.taskbar-edit-delete{
+  display:flex ;
+  width: 50%;
+  justify-content: flex-end;
+  }
+
+.trash-icon{
+  width:auto;
+  height: 3.5vh;
+}
+
+.edit-icon{
+  width:auto;
+  height: 3.5vh;
+}
+
 .defaultButtonContainer{
 min-height: 235px;
 max-height:30vh;
@@ -106,8 +135,13 @@ margin-left: 1.05vw;
 .defaultButtons  P:hover{
   border:none;
   box-shadow: none;
-
 }
+
+.defaultButtons:hover{
+  cursor: pointer;
+}
+
+
 .defaultButtons{
   display: flex;
   width: 100%;
@@ -127,6 +161,11 @@ margin-left: 1.05vw;
 
 }
 
+.addedButtons:hover{
+  border:none;
+  box-shadow: none;
+  cursor: pointer;
+}
 
 
 
@@ -165,32 +204,6 @@ margin-left: 1.05vw;
 
 } */
 
-.viewAllProjectsContainer{
-  min-height: 70px;
-  height: 4vh;
-  position: fixed;
-  bottom: 0%;
-  left: 2.4%;
-}
-
-.viewAllProjectsButton{
-  font-size: 1.2rem;
-  width: 10vw;
-  height: 40px;
-  min-width: 170px;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
-  text-shadow: 1px 1px 4px #000000;
-  background-Color:#560BAD ;
-  color: white;
-  border: none;
-  border-radius: 20px;
-}
-
-.viewAllProjectsButton:hover{
-  box-shadow: 5px 4px 17px 0px rgba(0, 0, 0, 0.4);
-  color:white;
-  background-Color:#560BAD ;
-}
 
 
 
@@ -225,8 +238,19 @@ margin-left: 1.05vw;
   border-radius: 20px;
 }
 
-.main-page-schedule-list{
 
+.main-page-schedule-list{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.deadline-date{
+  font-size: 1.5vh;
+  margin: 1%;
+  margin-left: 4.5vw;
+  height: 3.5vh;
+  color: #097200;
 }
 
 .main-page-schedule{
@@ -252,7 +276,8 @@ input.todo-checkbox{
   width: 50vw;
   margin: auto;
   margin-top: 2vh;
-  display: flex;
+  height: 9vh;
+
 }
 
 .added-tasks-text{
@@ -260,7 +285,7 @@ input.todo-checkbox{
   font-weight: 300;
   font-size:4.5vh;
   word-wrap: break-word;
-  margin-left: 2.5vw;
+  margin-left: 1.2vw;
 
 }
 .task-add{
@@ -457,6 +482,36 @@ border: 2px solid #C4C4C4;
   display: flex;
   flex-direction: column;
 }
+
+.project-edit{
+  background-color:hsl(268, 88%, 36%);
+  width:570px;
+  min-width: 407px;
+  height:15.2vw;
+  min-height: 280px;
+  border-radius:20px;
+  position: fixed;
+  left: 55%;
+  bottom:40%;
+  transform: translate(-50%, 0);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:0px 4px 10px;
+}
+
+.project-edit__innerLayer{
+  background-color:#ffffff;
+  width:550px;
+  min-width: 385px;
+  height:260px;
+  min-height: 245px;
+  border-radius:10px;
+  box-shadow:0px 4px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 
 .form-container{
   width: 400px;
