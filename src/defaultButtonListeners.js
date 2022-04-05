@@ -13,8 +13,7 @@ const auth = firebase.auth();
 
 export function defaultButtonListener(newButtonDiv) {
   newButtonDiv.addEventListener('click', (e) => {
-    console.log(e.target.textContent);
-    document.title =e.target.textContent
+    document.title =e.target.textContent;
 
     mainContentErase();
     mainContentBuilder();
@@ -23,15 +22,15 @@ export function defaultButtonListener(newButtonDiv) {
      case "Notifications":
        defaultButtonPageBuilders.notificationPage();
        break;
-     case "weekPage":
+     case "This Week":
       defaultButtonPageBuilders.thisWeekPage();
 
        break;
-       case "monthPage":
+       case "This Month":
         defaultButtonPageBuilders.thisMonthPage();
 
        break;
-       case "completedTasks":
+       case "Completed":
         defaultButtonPageBuilders.completedTasks();
         break;
        
@@ -127,11 +126,17 @@ export function projectsAddListerner(elementClicked) {
             const {
               serverTimestamp
             } = firebase.firestore.FieldValue;
+            projectsRef.get().then(()=>{
+              projectsRef.doc(user.uid).collection("projects").add({
+                project: Projects
+              })
+              .then((docRef) => {
+                db.collection('users').doc(user.uid).collection("projects").doc(docRef.id).update({id:docRef.id});
+              });
+  
 
-            db.collection('users').doc(user.uid).collection("projects").doc(Projects.name).set({
-              project: Projects
-            });
-
+            })
+           
           } else {
 
           }

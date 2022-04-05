@@ -12,6 +12,7 @@ import {
   editButtonEventListener,
   trashButtonEventListener,checkMarkEventListener
 } from "./addedButtons";
+import { el } from 'date-fns/locale';
 const db = firebase.firestore();
 const auth = firebase.auth();
 //Notification
@@ -120,77 +121,269 @@ const createButton = (pageState) => ({
 
 export const defaultButtonPageBuilders=(()=>{
   const notificationPage = () =>{
-    console.log('hi')
-    let tasksRef;
-    tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects");
 
-    let allProjects = [];
-   
-
-    tasksRef.get()
-    .then((querySnapshot)=>{
-      querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-      allProjects.push(doc.data());
-      console.log(allProjects)
-    
-      
-  
-      })
-
-
+     let tasksRef;
+    let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
+    // let taskHolder =[];    
+    const taskNode = document.querySelectorAll('.projectTitle');
+    const taskArray = [...taskNode];
+    let tasks = db.collectionGroup('tasks').where('userId','==',firebase.auth().currentUser.uid)
+    tasks.get().then((querySnapshot)=>{
+     querySnapshot.forEach((doc)=>{
+     })
     })
+    
+  // console.log(tasks,'tasks');  
+  //   taskArray.forEach(notificationTask =>{
+  //   // let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collectionGroup('tasks');
+ 
+  // //   tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
 
-    tasksRef.orderBy('tasks.date').onSnapshot(querySnapshot => {
-      let taskHolder = []
-      let mainPageScheduleList = document.querySelector('.main-page-schedule-list');
-      let wipe = document.querySelector('.main-page-schedule-list');
-      //remove children, starts clean slate 
-      if (wipe.firstChild != null) {
-        while (wipe.firstChild) {
-          wipe.removeChild(wipe.firstChild);
-        }
-      }
+  // //     querySnapshot.docs.map(doc=>{
+  // //       taskHolder.push(
+  // //         `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+  // //               </div></div>
+  // //               <div class='deadline-date'><label>${doc.data().tasks.date}</label>
+  // //               </div>
+  // //             </div>`)
+
+            
+  // //           });
+     
+
+  // //     mainPageScheduleList.innerHTML = taskHolder.join('');
+  // //   editButtonEventListener();
+  // //   trashButtonEventListener();
+  // //   checkMarkEventListener();
+  // //   // console.log('taskholder',taskHolder)
+   
+  // // })
+
+  // })
+
+    //     let tasksRef;
+//     let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
+//     let taskHolder =[];    
+//     const taskNode = document.querySelectorAll('.projectTitle');
+//     const taskArray = [...taskNode];
+//     taskArray.forEach(notificationTask =>{
+//     let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collection('tasks');
+
+    
+//     tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
+// console.log(taskHolder);
+//       querySnapshot.forEach(doc=>{
+
   
-      //map it all like you mapped the docs for projects
+        
+
+
+         
+
+//         taskHolder.push(
+//           `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+//                 </div></div>
+//                 <div class='deadline-date'><label>${doc.data().tasks.date}</label>
+//                 </div>
+//               </div>`)
+
+//               const filterItems = () => {
+//                 let spliceVal 
+//                 let tasksFiltered = taskHolder.filter(el => el.indexOf( `data-id=${doc.id}`) !== -1)
+//                 console.log(tasksFiltered.length,tasksFiltered)
+//                 switch (tasksFiltered.length) {
+//                   case 2:
+//                        spliceVal = tasksFiltered[0];
+//                     return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
+//                     break;
+//                   case 3:
+//                       spliceVal = tasksFiltered[0]
+//                       console.log(tasksFiltered)
+//                     return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
+//                     break;
+//                   default:
+//                     break;
+//                 }
+
+//               }
+//               filterItems();
+//             })
+     
+
+//       mainPageScheduleList.innerHTML = taskHolder.join('');
+//     editButtonEventListener();
+//     trashButtonEventListener();
+//     checkMarkEventListener();
+//     // console.log('taskholder',taskHolder)
+   
+//   })
+
+//   })
+  };
+
+  const thisWeekPage = () =>{
+    let tasksRef;
+    let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
+    let taskHolder =[];    
+    const taskNode = document.querySelectorAll('.projectTitle');
+    const taskArray = [...taskNode];
+    taskArray.forEach(notificationTask =>{
+    let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collection('tasks');
+
+    
+    tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
+
+      querySnapshot.forEach(doc=>{
+
   
-      querySnapshot.docs.map(doc => {
-        console.log(doc.data());
+        
+
+
+         
+
         taskHolder.push(
-          `<div class="added-tasks" data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+          `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
                 </div></div>
                 <div class='deadline-date'><label>${doc.data().tasks.date}</label>
                 </div>
               </div>`)
-        //let the color of the date equal the priority 
-  
-      });
-      //in here we're gonna grab the tasks
-      // and either append them with a class and make the style 
-      //here or find a another method
-      //maybe have this whole function call a format after wiping one
-  
-  
-  
+
+              const filterItems = () => {
+                let spliceVal 
+                let tasksFiltered = taskHolder.filter(el => el.indexOf( `data-id=${doc.id}`) !== -1)
+                console.log(tasksFiltered.length)
+                switch (tasksFiltered.length) {
+                  case 2:
+                       spliceVal = tasksFiltered[0];
+                    return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
+                    break;
+                  case 1:
+                      spliceVal = tasksFiltered[0]
+                      console.log(tasksFiltered)
+                    return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
+                    break;
+                  default:
+                    break;
+                }
+
+              }
+              filterItems();
+            })
+     
+
       mainPageScheduleList.innerHTML = taskHolder.join('');
-      editButtonEventListener();
-      trashButtonEventListener();
-      checkMarkEventListener();
-  
-  
-    });
-  };
+    editButtonEventListener();
+    trashButtonEventListener();
+    checkMarkEventListener();
+    // console.log('taskholder',taskHolder)
+   
+  })
 
-  const thisWeekPage = () =>{
-
+  })
   };
 
   const thisMonthPage = () =>{
+    let tasksRef;
+    let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
+    let taskHolder =[];    
+    const taskNode = document.querySelectorAll('.projectTitle');
+    const taskArray = [...taskNode];
+    taskArray.forEach(notificationTask =>{
+    let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collection('tasks');
 
+    
+    tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
+
+      querySnapshot.forEach(doc=>{
+
+  
+        
+
+
+         
+
+        taskHolder.push(
+          `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+                </div></div>
+                <div class='deadline-date'><label>${doc.data().tasks.date}</label>
+                </div>
+              </div>`)
+
+              const filterItems = () => {
+
+                let tasksFiltered = taskHolder.filter(el => el.indexOf( `data-id=${doc.id}`) !== -1)
+                if(tasksFiltered.length == 2){
+
+                  let spliceVal = tasksFiltered[0];
+                return taskHolder.splice(taskHolder.indexOf(spliceVal),1);
+                }
+
+              }
+              filterItems();
+            })
+     
+
+      mainPageScheduleList.innerHTML = taskHolder.join('');
+    editButtonEventListener();
+    trashButtonEventListener();
+    checkMarkEventListener();
+    // console.log('taskholder',taskHolder)
+   
+  })
+
+  })
   };
 
   const completedTasks = () =>{
+    let tasksRef;
+    let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
+    let taskHolder =[];    
+    const taskNode = document.querySelectorAll('.projectTitle');
+    const taskArray = [...taskNode];
+    taskArray.forEach(notificationTask =>{
+    let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collection('tasks');
 
+    
+    tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
+
+      querySnapshot.forEach(doc=>{
+
+  
+        
+
+
+         
+
+        taskHolder.push(
+          `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+                </div></div>
+                <div class='deadline-date'><label>${doc.data().tasks.date}</label>
+                </div>
+              </div>`)
+
+              const filterItems = () => {
+
+                let tasksFiltered = taskHolder.filter(el => el.indexOf( `data-id=${doc.id}`) !== -1)
+                if(tasksFiltered.length == 2){
+
+                  let spliceVal = tasksFiltered[0];
+                return taskHolder.splice(taskHolder.indexOf(spliceVal),1);
+                }
+
+              }
+              filterItems();
+            })
+     
+
+      mainPageScheduleList.innerHTML = taskHolder.join('');
+    editButtonEventListener();
+    trashButtonEventListener();
+    checkMarkEventListener();
+    // console.log('taskholder',taskHolder)
+   
+  })
+
+  })
   };
 
 

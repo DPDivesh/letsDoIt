@@ -7,12 +7,23 @@ const {
   serverTimestamp
 } = firebase.firestore.FieldValue;
 
-export const createProject = (name, taskName) => {
+export const createProject = (name) => {
   return {
     name: name,
+    
   }
 };
-
+export const docID = ()=>{
+  let buttonsNode = document.querySelectorAll('.projectTitle');
+  let buttonsArray = [...buttonsNode];
+  let buttonIDValue;
+  buttonsArray.forEach((button)=>{
+    if(button.innerHTML == document.title){
+      buttonIDValue = button.id
+    }
+  })
+  return buttonIDValue
+}
 
 export const createTask=((projectName, taskName, priorityLevel, dateVal)=> {
  
@@ -24,16 +35,22 @@ export const createTask=((projectName, taskName, priorityLevel, dateVal)=> {
       task,
       priorityLevel,
       date,
+      id:docUID,
     };
   };
 
+    const docUID=docID();
+    
   const updateProject = (projectVals) => {
     //update project for the most part updates the task
     let projectsRef;
     // // let tasksRef;
     // let uid;
     // uid = getUserId(uid);
-    projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title);
+
+  
+
+    projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docUID);
     projectsRef.get().then(() => {
       // console.log(doc.data().project[indexVal].tasks.arrayUnion(),'nameee');
       //https://fireship.io/snippets/read-a-single-firestore-document/
@@ -43,7 +60,8 @@ export const createTask=((projectName, taskName, priorityLevel, dateVal)=> {
           tasks: projectVals
         })
         .then((docRef) => {
-          projectsRef.collection('tasks').doc(docRef.id).update({id:docRef.id});
+          projectsRef.collection('tasks').doc(docRef.id).update({id:docRef.id,      userId:firebase.auth().currentUser.uid,
+          });
         });
       // db.collection('users').doc(firebase.auth().currentUser.uid).update("project",firebase.firestore.FieldValue.arrayUnion());
   
@@ -68,20 +86,24 @@ export const createTask=((projectName, taskName, priorityLevel, dateVal)=> {
 
 
 
-export const updateTask =((projectName, taskName, priorityLevel, dateVal,taskId)=>{
+export const updateTask =((projectName, taskName, priorityLevel, dateVal,taskId,docId)=>{
   let projectsRef;
+
   const projectVals = {projectName:projectName,
      task:taskName,
      priorityLevel:priorityLevel,
-     date:dateVal}
-  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title);
+     date:dateVal,
+     id:docId,
+    userId:firebase.auth().currentUser.uid}
+  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId);
   projectsRef.get().then(() => {
 
     projectsRef.collection('tasks').doc(taskId).update({
         tasks: projectVals
       })
       .then(() => {
-        projectsRef.collection('tasks').doc(taskId).update({id:taskId});
+        projectsRef.collection('tasks').doc(taskId).update({id:taskId,      userId:firebase.auth().currentUser.uid,
+        });
       });
     // db.collection('users').doc(firebase.auth().currentUser.uid).update("project",firebase.firestore.FieldValue.arrayUnion());
 
@@ -91,10 +113,11 @@ export const updateTask =((projectName, taskName, priorityLevel, dateVal,taskId)
   }
 })
 
-export const completeTask =((taskId)=>{
+export const completeTask =((taskId,docId)=>{
   let projectsRef;
   
-  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title);
+
+  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId);
   projectsRef.get().then(() => {
 
     projectsRef.collection('tasks').doc(taskId).update({

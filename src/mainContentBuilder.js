@@ -21,6 +21,7 @@ import {
   editButtonEventListener,
   trashButtonEventListener,checkMarkEventListener
 } from "./addedButtons";
+import { docID } from "./projectCreate";
 
 //ideas
 //#1 Have the buttons have an event Listener to call each function could module pattern for security
@@ -121,7 +122,8 @@ export function addedButtonTaskView() {
   mainPageScheduleList.className = 'main-page-schedule-list';
   mainPageSchedule.append(mainPageScheduleList);
   mainContent.append(mainPageSchedule)
-  tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection("tasks");
+  const docUID = docID();
+  tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docUID).collection("tasks");
 
 
   tasksRef.orderBy('tasks.date').onSnapshot(querySnapshot => {
@@ -138,7 +140,7 @@ export function addedButtonTaskView() {
 
     querySnapshot.docs.map(doc => {
       taskHolder.push(
-        `<div class="added-tasks" data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
+        `<div class="added-tasks" id=${doc.data().tasks.id} data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
               </div></div>
               <div class='deadline-date'><label>${doc.data().tasks.date}</label>
               </div>
@@ -322,7 +324,7 @@ function createTaskSubmitCircle() {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            createTask(projectName.innerHTML, taskName, priorityLevel, dateVal);
+            createTask(projectName.innerHTML, taskName, priorityLevel, dateVal,);
 
           })
         })

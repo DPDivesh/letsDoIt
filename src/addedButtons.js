@@ -15,6 +15,7 @@ import {
 import {
   querystring
 } from "browserify/lib/builtins";
+import { docID } from "./projectCreate";
 const db = firebase.firestore();
 const auth = firebase.auth();
 let unsubscribe;
@@ -51,7 +52,8 @@ export function completedButtonEventListener() {
     button.addEventListener('click', (e) => {
       //unique identifier 
       let taskId = e.currentTarget.parentNode.parentNode.firstChild.querySelector('.added-tasks-text').getAttribute('data-id')
-      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection('tasks').doc(taskId);
+      let docId = e.currentTarget.parentNode.parentNode.parentNode.id
+      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId).collection('tasks').doc(taskId);
       //create an interface to edit the task info, deadline, name
 
 
@@ -62,8 +64,9 @@ export function checkMarkEventListener() {
   let getCheckMark = document.querySelectorAll('.todo-checkbox');
   getCheckMark.forEach(checkBox=>
     checkBox.addEventListener('click',(e)=>{
+      let docId = e.currentTarget.parentNode.parentNode.parentNode.id
       let taskId = e.currentTarget.parentNode.parentNode.firstChild.querySelector('.added-tasks-text').getAttribute('data-id');
-      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection('tasks').doc(taskId);
+      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId).collection('tasks').doc(taskId);
       projectsRef.get().then((doc) => {
   
         let tasksRef;
@@ -76,7 +79,7 @@ export function checkMarkEventListener() {
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach(() => {
-              completeTask(taskId);
+              completeTask(taskId,docId);
   
             })
           })
@@ -101,8 +104,10 @@ export function editButtonEventListener() {
   editEventListener.forEach(button =>
     button.addEventListener('click', (e) => {
       //unique identifier 
+      let docId = e.currentTarget.parentNode.parentNode.parentNode.id
+
       let taskId = e.currentTarget.parentNode.parentNode.firstChild.querySelector('.added-tasks-text').getAttribute('data-id');
-      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection('tasks').doc(taskId);
+      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId).collection('tasks').doc(taskId);
       projectsRef.get().then((doc) => {
         if (document.querySelector('.project-edit') == null && document.querySelector('.task-add') == null && document.querySelector('.project-add') == null) {
           let createSubmitComponent = document.createElement('div');
@@ -219,7 +224,7 @@ export function editButtonEventListener() {
               .get()
               .then((querySnapshot) => {
                 querySnapshot.forEach(() => {
-                  updateTask(projectName.innerHTML, taskName, priorityLevel, dateVal, taskId);
+                  updateTask(projectName.innerHTML, taskName, priorityLevel, dateVal, taskId,docId);
 
                 })
               })
@@ -255,11 +260,14 @@ function exitForm() {
 
 export function trashButtonEventListener() {
   let trashEventListener = document.querySelectorAll('.trash-icon');
+
   trashEventListener.forEach(button =>
     button.addEventListener('click', (e) => {
       //unique identifier 
-      let taskId = e.currentTarget.parentNode.parentNode.firstChild.querySelector('.added-tasks-text').getAttribute('data-id')
-      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection('tasks').doc(taskId);
+      let taskId = e.currentTarget.parentNode.parentNode.firstChild.querySelector('.added-tasks-text').getAttribute('data-id');
+      let docId = e.currentTarget.parentNode.parentNode.parentNode.id
+      
+      projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId).collection('tasks').doc(taskId);
       projectsRef.delete()
 
 
