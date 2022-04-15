@@ -21,6 +21,7 @@ import {
   editButtonEventListener,
   trashButtonEventListener,checkMarkEventListener
 } from "./addedButtons";
+import { defaultButtonPageBuilders } from "./defaultButtons";
 import { docID } from "./projectCreate";
 
 //ideas
@@ -35,6 +36,7 @@ export function mainContentBuilder() {
   //newProjectBuilder
   if (document.querySelector('.mainContentContainer')==null){
   mainContainerBuilder();
+
   }
 }
 

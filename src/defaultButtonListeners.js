@@ -46,13 +46,7 @@ export function defaultButtonListener(newButtonDiv) {
 
 
 //projects up down arrow
-export function projectsExpandListerner(elementClicked) {
-  elementClicked.addEventListener('click', () => {
-    //change state of content
-    //add animation
-  })
 
-}
 //projects Add Button
 export function projectsAddListerner(elementClicked) {
   elementClicked.addEventListener('click', () => {

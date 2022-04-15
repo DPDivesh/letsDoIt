@@ -1,10 +1,14 @@
 import {navBarBuilder} from "./navBarBuilder";
 
-import {mainContentBuilder} from './mainContentBuilder';
+import {defaultButtonTaskView, mainContentBuilder} from './mainContentBuilder';
 
-
+import { defaultButtonPageBuilders } from "./defaultButtons";
 export function webPageBuilder(){
   navBarBuilder();
-  mainContentBuilder();  
+  mainContentBuilder(); 
+  document.title = "Notifications"
+  defaultButtonTaskView("Notifications");
+  defaultButtonPageBuilders.notificationPage();
+  // defaultButtonPageBuilders.notificationPage();
 
 }

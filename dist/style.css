@@ -91,7 +91,6 @@ text-indent: 1vw;}
 
 .taskbar-options{
 display: flex;
-height: 5.5vh;
 } 
 
 .task-selection{
@@ -105,13 +104,11 @@ width: 50%;
   }
 
 .trash-icon{
-  width:auto;
-  height: 3.5vh;
+  width:2vw;
 }
 
 .edit-icon{
-  width:auto;
-  height: 3.5vh;
+  width:2vw;
 }
 
 .defaultButtonContainer{
@@ -246,7 +243,7 @@ margin-left: 1.05vw;
 
 
 .deadline-date{
-  font-size: 1.5vh;
+  font-size: .7vw;
   margin: 1%;
   margin-left: 4.5vw;
   height: 3.5vh;
@@ -266,34 +263,34 @@ input.todo-checkbox{
   color: #B6B6B6;
   transform: scale(1.4);
   margin-left: 2vw;
-  margin-top: 1.7vh;
+  padding-top: 3%;
 
   
 }
 /*tasks*/
 .added-tasks{
   border-bottom: 1px solid #B6B6B6;
-  width: 50vw;
+  width: 100%;
   margin: auto;
-  margin-top: 2vh;
-  height: 9vh;
+  padding-top: 3%;
 
 }
+
 
 .added-tasks-text{
   font-family:  roboto;
   font-weight: 300;
-  font-size:4.5vh;
+  font-size:1.7vw;
   word-wrap: break-word;
   margin-left: 1.2vw;
 
 }
 .task-add{
   background-color:hsl(268, 88%, 36%);
-  width:570px;
-  min-width: 407px;
-  height:15.2vw;
-  min-height: 280px;
+  width:34vw;
+  height:16.4vw;
+  min-height: 297px;
+  min-width: 617px;
   border-radius:20px;
   position: fixed;
   left: 55%;
@@ -307,12 +304,12 @@ input.todo-checkbox{
 
 .task-add__innerLayer{
   background-color:#ffffff;
-  width:550px;
-  min-width: 385px;
-  height:260px;
-  min-height: 245px;
-  border-radius:10px;
-  box-shadow:0px 4px 10px;
+  width:32vw;
+  height:15vw;
+  min-width: 580px;
+  min-height: 272px;
+  border-radius:1vw;
+  box: shadow 0vh .2vh 1.4vh;
   display: flex;
   flex-direction: column;
 }
@@ -353,9 +350,8 @@ input.todo-checkbox{
 
 .task-button-holder{
   display: flex;
-  position: relative;
-  top: 50%;
-  left: 15%;
+  margin-top: 30%;
+  margin-left: 35%;
   }
 
   .drop-down{
@@ -440,7 +436,7 @@ border: 2px solid #C4C4C4;
 }
 
 .page-header{
-  border-bottom: 1px solid;
+  border-bottom: .2vh solid;
   width: 70vw;
   margin: auto;
   margin-bottom: 7vh;
@@ -514,10 +510,9 @@ border: 2px solid #C4C4C4;
 
 
 .form-container{
-  width: 400px;
-  min-width: 200px;
-  margin-left: 50px;
-  margin-top: 7px;
+  width: 16vw;
+  margin-left: 4vw;
+  margin-top: .5vw;
 }
  .form-group{
   font-size:1.4rem;

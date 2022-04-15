@@ -116,16 +116,14 @@ export const updateTask =((projectName, taskName, priorityLevel, dateVal,taskId,
 export const completeTask =((taskId,docId)=>{
   let projectsRef;
   
+console.log(docId,taskId)
+  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId).collection('tasks').doc(taskId);
+  projectsRef.get().then((doc) => {
 
-  projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docId);
-  projectsRef.get().then(() => {
-
-    projectsRef.collection('tasks').doc(taskId).update({
-        tasks: "task-completed"
+    projectsRef.update({
+        tasks:{ status:"task-completed",task:doc.data().tasks.task},
+        id:taskId
       })
-      .then(() => {
-        projectsRef.collection('tasks').doc(taskId).update({id:taskId});
-      });
     // db.collection('users').doc(firebase.auth().currentUser.uid).update("project",firebase.firestore.FieldValue.arrayUnion());
 
   })

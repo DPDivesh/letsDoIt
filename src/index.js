@@ -1,5 +1,6 @@
 import { allContentErase, mainContentErase } from './addedButtons';
 import { defaultButtonListener } from './defaultButtonListeners';
+import { createProject } from './projectCreate';
 
 import {webPageBuilder} from './webPageBuilder';
 const db = firebase.firestore();
@@ -49,17 +50,29 @@ const login =(()=>{
             if(result.additionalUserInfo.isNewUser == true){
               const {serverTimestamp
               } = firebase.firestore.FieldValue;
-        
-                db.collection('users').doc(result.user.uid).set({
+              const newUser = db.collection('users').doc(result.user.uid);
+                newUser.set({
                   uid: result.user.uid,
                   userName: result.user.displayName,
                   email: result.user.email,
-                  project:[],
                   createdAt: serverTimestamp()
-        
-                })}
+                })   
+                  // newUser.collection("projects").doc('demo').collection('tasks').doc('demo');
+                  newUser.collection("projects").add({project:{name:"demo"},
+                }).then((docRef) => {
+                    newUser.collection("projects").doc(docRef.id).update({id:docRef.id
+                    });
+                  });
+                  defaultButtonPageBuilders.notificationPage();
+
+              }
+
+
+              
+
                 else{
                   allContentErase();
+                  defaultButtonPageBuilders.notificationPage();
 
                 }
           });
