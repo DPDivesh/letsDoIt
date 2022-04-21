@@ -105,10 +105,17 @@ width: 50%;
 
 .trash-icon{
   width:2vw;
+  height: 2vw;
+  min-height: 24px;
+  min-width: 24px;
+
 }
 
 .edit-icon{
   width:2vw;
+  height: 2vw;
+  min-height: 24px;
+  min-width: 24px;
 }
 
 .defaultButtonContainer{
@@ -165,6 +172,11 @@ margin-left: 1.05vw;
 }
 
 
+.projectTitle{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
 
 .addedButtons{
   display: flex;
@@ -175,7 +187,7 @@ margin-left: 1.05vw;
   align-items: center;
   font-size: calc(17px + .5vw);
   margin-top: 1vh;
-  border-radius:15px;
+  border-radius: 15px;
 
 
 }
@@ -186,8 +198,8 @@ margin-left: 1.05vw;
 
 
 .addedButtonContainer{
-  height: 50vh;
   width: 100%;
+  margin-top: 1vw;
 }
 
 .addedButtonContainer :hover{
@@ -243,7 +255,7 @@ margin-left: 1.05vw;
 
 
 .deadline-date{
-  font-size: .7vw;
+  font-size: calc(7px + .5vw);  ;
   margin: 1%;
   margin-left: 4.5vw;
   height: 3.5vh;
@@ -280,7 +292,7 @@ input.todo-checkbox{
 .added-tasks-text{
   font-family:  roboto;
   font-weight: 300;
-  font-size:1.7vw;
+  font-size: calc(17px + .5vw);
   word-wrap: break-word;
   margin-left: 1.2vw;
 
@@ -291,7 +303,7 @@ input.todo-checkbox{
   height:16.4vw;
   min-height: 297px;
   min-width: 617px;
-  border-radius:20px;
+  border-radius:1vw;
   position: fixed;
   left: 55%;
   bottom:40%;
@@ -313,23 +325,25 @@ input.todo-checkbox{
   display: flex;
   flex-direction: column;
 }
+
+
 .input-tasks{
-  width:100%;
+  width:75%;
   min-width: 200px;
-  min-height: 20px;
-  height:30px;
+  min-height: 25px;
   background-color:#EAEAEA;
   border:none;
-  margin-right:2vw;
-  border-radius:20px;
-  margin-top: 10px;
+  border-radius:2vw;
+  margin-top: 1vw;
   text-indent: 1vw;
   outline: none;
-
 }
 .date-picker{
   margin-left: 5%;
-  margin-top: 5%;
+  border-radius: .5vw;
+  margin-top: 2%;
+  width: 20%;
+  text-align: center;
 }
 
 .submit-task{
@@ -350,15 +364,12 @@ input.todo-checkbox{
 
 .task-button-holder{
   display: flex;
-  margin-top: 30%;
-  margin-left: 35%;
+  margin-top: 4%;
+  margin-left: 7%;
   }
 
   .drop-down{
-    position: relative;
-    display: inline-block;
-    top:35%;
-    right:36%;
+    margin-top: 5%;
   }
 
   .input-dropdown{
@@ -440,12 +451,24 @@ border: 2px solid #C4C4C4;
   width: 70vw;
   margin: auto;
   margin-bottom: 7vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
 }
 
 .page-header-text{
   margin-left: 5vw;
 
   position:relative;
+  top: 1vw;
+}
+
+.project-done{
+  color: #B6B6B6;
+  transform: scale(1.4);
+  margin-left: 1vw;
+  position: relative;
   top: 1vw;
 }
 
@@ -510,9 +533,11 @@ border: 2px solid #C4C4C4;
 
 
 .form-container{
-  width: 16vw;
-  margin-left: 4vw;
-  margin-top: .5vw;
+  width: 86%;
+  display: flex;
+  margin-top: 1vw;
+  margin-left: 14%;
+  flex-direction: column;
 }
  .form-group{
   font-size:1.4rem;

@@ -16,6 +16,7 @@ import {
   querystring
 } from "browserify/lib/builtins";
 import { docID } from "./projectCreate";
+import { tr } from "date-fns/locale";
 const db = firebase.firestore();
 const auth = firebase.auth();
 let unsubscribe;
@@ -26,8 +27,9 @@ export function addedButtonEventListener() {
   getButtons.forEach(button =>
     button.addEventListener('click', (e) => {
       // erase the main content
+      console.log(e.currentTarget.querySelector('.projectTitle').id)
       document.title = e.target.textContent;
-
+      const onClickID = e.currentTarget.querySelector('.projectTitle').id;
 
 
       mainContentErase();
@@ -36,8 +38,8 @@ export function addedButtonEventListener() {
       //use generic format function (make one)
       //that function will be used to create more
       //send the info and query at the generic function 
-      addedButtonTaskView(e.target.textContent);
-    }))
+      addedButtonTaskView(onClickID);
+    },{capture:true}))
 
 }
 
@@ -76,8 +78,7 @@ export function checkMarkEventListener() {
 
 export function editButtonEventListener() {
   let editEventListener = document.querySelectorAll('.edit-icon');
-  // let tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection("tasks");
-
+ 
 
 
   editEventListener.forEach(button =>

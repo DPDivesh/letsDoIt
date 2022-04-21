@@ -102,7 +102,7 @@ export function defaultButtonTaskView(pageName) {
 
 
 
-export function addedButtonTaskView() {
+export function addedButtonTaskView(onClickID) {
   let tasksRef;
   let unsubscribe;
   let projectsRef;
@@ -113,7 +113,7 @@ export function addedButtonTaskView() {
   // and either append them with a class and make the style 
   //here or find a another method
   //maybe have this whole function call a format after wiping one
-  addedButtonContentLayout(mainContent);
+  addedButtonContentLayout(mainContent,onClickID);
   let mainPageSchedule = document.createElement('div');
   mainPageSchedule.className = 'main-page-schedule';
   let headerText = document.createElement('h2');
@@ -124,8 +124,8 @@ export function addedButtonTaskView() {
   mainPageScheduleList.className = 'main-page-schedule-list';
   mainPageSchedule.append(mainPageScheduleList);
   mainContent.append(mainPageSchedule)
-  const docUID = docID();
-  tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(docUID).collection("tasks");
+
+  tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(onClickID).collection("tasks");
 
 
   tasksRef.orderBy('tasks.date').onSnapshot(querySnapshot => {
@@ -178,14 +178,27 @@ function defaultButtonContentLayout(){
 
 }
 
-function addedButtonContentLayout() {
-  let mainContent = document.querySelector(".mainContentContainer");
+function addedButtonContentLayout(mainContent,onClickID) {
   let headerTitle = document.createElement('div');
   let headerText = document.createElement('h1');
+  let headerCheckBox = document.createElement('input');
+  console.log(onClickID,'see me?')
+  headerCheckBox.addEventListener("click",()=>{
+        db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(onClickID).set({
+      status:"completed",
+    })
+ 
+  })
+  headerCheckBox.type='checkbox';
+  headerCheckBox.className ='project-done';
   headerText.innerHTML = document.title;
   headerTitle.className = 'page-header';
+
   headerText.className = 'page-header-text';
+  headerText.id = onClickID;
   headerTitle.appendChild(headerText);
+
+  headerTitle.appendChild(headerCheckBox);
   document.querySelector(".mainContentContainer").append(headerTitle);
 
   createTaskSubmitCircle();
@@ -260,6 +273,8 @@ function createTaskSubmitCircle() {
     createInputFormDate.type = 'date';
     createInputFormDatePickerLabel.innerHTML = 'Due Date:'
     let formLabel = document.createElement('label');
+    let inputForm = document.createElement('div');
+    inputForm.className = "task-submit"
     inputFormContainer.className = 'form-container';
     formLabel.className = 'form-group';
     formLabel.setAttribute('for', 'createNewTask');
@@ -275,10 +290,13 @@ function createTaskSubmitCircle() {
     createBackgroundComponent.style.backgroundColor = "#FFFFF";
     let contentDocument = document.querySelector('.mainContentContainer');
     createBackgroundComponent.appendChild(inputFormContainer);
-    inputFormContainer.appendChild(formLabel)
+    inputForm.appendChild(formLabel);
+    inputForm.appendChild(createInputFormTitle);
+    inputFormContainer.appendChild(inputForm);
+    // inputFormContainer.appendChild(formLabel)
     inputFormContainer.appendChild(document.createElement('br'))
     contentDocument.appendChild(createSubmitComponent);
-    inputFormContainer.appendChild(createInputFormTitle);
+    // inputFormContainer.appendChild(createInputFormTitle);
     inputFormContainer.appendChild(createInputFormDatePickerLabel);
     inputFormContainer.appendChild(createInputFormDate);
     inputFormContainer.appendChild(createInputFormPriorityDropDown);
