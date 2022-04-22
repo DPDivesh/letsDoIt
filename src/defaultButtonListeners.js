@@ -30,7 +30,7 @@ export function defaultButtonListener(newButtonDiv) {
         defaultButtonPageBuilders.thisMonthPage();
 
        break;
-       case "Completed":
+       case "History":
         defaultButtonPageBuilders.completedTasks();
         break;
        

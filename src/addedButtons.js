@@ -27,7 +27,6 @@ export function addedButtonEventListener() {
   getButtons.forEach(button =>
     button.addEventListener('click', (e) => {
       // erase the main content
-      console.log(e.currentTarget.querySelector('.projectTitle').id)
       document.title = e.target.textContent;
       const onClickID = e.currentTarget.querySelector('.projectTitle').id;
 
@@ -46,7 +45,6 @@ export function addedButtonEventListener() {
 //adds the task to completed tasks (instead of moving to a new collection, make a completed identifier)
 export function completedButtonEventListener() {
   let completedEventListener = document.querySelectorAll('.edit-icon');
-  // let tasksRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(document.title).collection("tasks");
 
 
 

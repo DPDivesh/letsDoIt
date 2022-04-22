@@ -23,6 +23,7 @@ import {
 } from "./addedButtons";
 import { defaultButtonPageBuilders } from "./defaultButtons";
 import { docID } from "./projectCreate";
+import { webPageBuilder } from "./webPageBuilder";
 
 //ideas
 //#1 Have the buttons have an event Listener to call each function could module pattern for security
@@ -184,10 +185,26 @@ function addedButtonContentLayout(mainContent,onClickID) {
   let headerCheckBox = document.createElement('input');
   console.log(onClickID,'see me?')
   headerCheckBox.addEventListener("click",()=>{
-        db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(onClickID).set({
-      status:"completed",
+    let projectRef=db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(onClickID)
+    let taskRef = projectRef.collection('tasks');
+
+    taskRef.get().then((querySnapshot)=>{
+      querySnapshot.docs.map(doc=>{
+      taskRef.doc(doc.data().id).update({
+        tasks:{ status:"task-completed",task:doc.data().tasks.task},
+        id:doc.data().id
+      });  
+      })
+        projectRef.set({
+        status:"completed",
+      })
+      document.body.innerHTML=(" ")
+     webPageBuilder();
+      
+  
+   
     })
- 
+    
   })
   headerCheckBox.type='checkbox';
   headerCheckBox.className ='project-done';
@@ -197,7 +214,6 @@ function addedButtonContentLayout(mainContent,onClickID) {
   headerText.className = 'page-header-text';
   headerText.id = onClickID;
   headerTitle.appendChild(headerText);
-
   headerTitle.appendChild(headerCheckBox);
   document.querySelector(".mainContentContainer").append(headerTitle);
 

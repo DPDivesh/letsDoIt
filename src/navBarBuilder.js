@@ -104,8 +104,9 @@ function addedButtonContainerBuilder(mainContainerAppender) {
       projectsRef = db.collection('users').doc(firebase.auth().currentUser.uid).collection('projects').onSnapshot(querySnapshot => {
         let projects = [];
         querySnapshot.docs.map(doc => {
+          if (doc.data().id != undefined){
           projects.push(`<div class=addedButtons><p class='projectTitle'id=${doc.data().id}>${doc.data().project.name}</p></div>`)
-
+          }
 
         });
         document.querySelector('.addedButtonContainer').innerHTML = projects.join("");

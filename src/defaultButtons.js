@@ -39,7 +39,7 @@ export const defaultNotifications = () => {
 
 export const defaultCompleted = (name) => {
   let pageState = {
-    name: "Completed",
+    name: "History",
     emoji: emoji.Today,
     id: 'completedTasks'
   }
@@ -142,92 +142,7 @@ export const defaultButtonPageBuilders=(()=>{
     checkMarkEventListener();
     })
     
-  // console.log(tasks,'tasks');  
-  //   taskArray.forEach(notificationTask =>{
-  //   // let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collectionGroup('tasks');
- 
-  // //   tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
-
-  // //     querySnapshot.docs.map(doc=>{
-        // taskHolder.push(
-        //   `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
-        //         </div></div>
-        //         <div class='deadline-date'><label>${doc.data().tasks.date}</label>
-        //         </div>
-        //       </div>`)
-
-            
-  // //           });
-     
-
-  // //     mainPageScheduleList.innerHTML = taskHolder.join('');
-  // //   editButtonEventListener();
-  // //   trashButtonEventListener();
-  // //   checkMarkEventListener();
-  // //   // console.log('taskholder',taskHolder)
-   
-  // // })
-
-  // })
-
-    //     let tasksRef;
-//     let mainPageScheduleList = document.querySelector('.main-page-schedule-list')
-//     let taskHolder =[];    
-//     const taskNode = document.querySelectorAll('.projectTitle');
-//     const taskArray = [...taskNode];
-//     taskArray.forEach(notificationTask =>{
-//     let tasks = db.collection('users').doc(firebase.auth().currentUser.uid).collection("projects").doc(notificationTask.id).collection('tasks');
-
-    
-//     tasks.orderBy('tasks.date').onSnapshot(querySnapshot=>{
-// console.log(taskHolder);
-//       querySnapshot.forEach(doc=>{
-
   
-        
-
-
-         
-
-//         taskHolder.push(
-//           `<div class="added-tasks"  id=${doc.data().tasks.id}  data-id=${doc.id}><div class='taskbar-options'><div class='task-selection'><input type="checkbox" class="todo-checkbox"><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div><div class='taskbar-edit-delete'><img src=${emoji.editIcon} class="edit-icon" alt=""><img src=${emoji.trashIcon} alt="" class="trash-icon">
-//                 </div></div>
-//                 <div class='deadline-date'><label>${doc.data().tasks.date}</label>
-//                 </div>
-//               </div>`)
-
-//               const filterItems = () => {
-//                 let spliceVal 
-//                 let tasksFiltered = taskHolder.filter(el => el.indexOf( `data-id=${doc.id}`) !== -1)
-//                 console.log(tasksFiltered.length,tasksFiltered)
-//                 switch (tasksFiltered.length) {
-//                   case 2:
-//                        spliceVal = tasksFiltered[0];
-//                     return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
-//                     break;
-//                   case 3:
-//                       spliceVal = tasksFiltered[0]
-//                       console.log(tasksFiltered)
-//                     return taskHolder.splice(taskHolder.indexOf(spliceVal),1);   
-//                     break;
-//                   default:
-//                     break;
-//                 }
-
-//               }
-//               filterItems();
-//             })
-     
-
-//       mainPageScheduleList.innerHTML = taskHolder.join('');
-//     editButtonEventListener();
-//     trashButtonEventListener();
-//     checkMarkEventListener();
-//     // console.log('taskholder',taskHolder)
-   
-//   })
-
-//   })
   };
 
   const thisWeekPage = () =>{
@@ -314,9 +229,7 @@ export const defaultButtonPageBuilders=(()=>{
         }
       }
      querySnapshot.forEach((doc)=>{
-       console.log(doc.data().tasks.status,doc.data().tasks)
       if(doc.data().tasks.status == 'task-completed'){ 
-        console.log('completed');
       taskHolder.push(
         `<div class="added-tasks"  id=${doc.id} ><div class='taskbar-options'><div class='task-selection'><label class="added-tasks-text" data-id=${doc.data().id}>${doc.data().tasks.task}</label></div></div>
               <div class='deadline-date'><label>${doc.data().tasks.status}</label>
