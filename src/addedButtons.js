@@ -105,28 +105,13 @@ export function editButtonEventListener() {
           let createInputFormPriorityDropDown = document.createElement('div');
           createInputFormPriorityDropDown.className = 'drop-down';
           createInputFormPriorityDropDown.id = 'drop-down';
-          let createInputFormPriorityDropDownSpan = document.createElement('span');
+          createInputFormPriorityDropDown.innerHTML=`<label for="priority" id="drop-down-priority">Select Priority:</label>
+          <select name="priority" id="input-dropdown">
+            <option data-priority="1" class="priority-one">Priority 1</option>
+            <option data-priority="2" class="priority-two">Priority 2</option>
+            <option data-priority="3" class="priority-three">Priority 3</option>
+          </select> `
 
-          createInputFormPriorityDropDownSpan.id = 'drop-down-priority';
-
-          let createInputFormPriority = document.createElement('div');
-          createInputFormPriority.className = 'input-dropdown'
-          let createInputFormPriorityText1 = document.createElement('p');
-          let createInputFormPriorityText2 = document.createElement('p');
-          let createInputFormPriorityText3 = document.createElement('p');
-          createInputFormPriorityText1.innerHTML = 'Priority 1';
-          createInputFormPriorityText1.setAttribute('data-priority', 1);
-          createInputFormPriorityText2.innerHTML = 'Priority 2';
-          createInputFormPriorityText2.setAttribute('data-priority', 2);
-          createInputFormPriorityText3.innerHTML = 'Priority 3';
-          createInputFormPriorityText3.setAttribute('data-priority', 3);
-          createInputFormPriorityText1.className = 'priority-one';
-          createInputFormPriorityText2.className = 'priority-two';
-          createInputFormPriorityText3.className = 'priority-three';
-          createInputFormPriorityDropDownSpan.innerHTML = 'Priority';
-          createInputFormPriorityDropDown.appendChild(createInputFormPriorityDropDownSpan);
-          createInputFormPriorityDropDown.append(createInputFormPriority);
-          createInputFormPriority.append(createInputFormPriorityText1, createInputFormPriorityText2, createInputFormPriorityText3);
 
 
           createInputFormDate.id = 'myDate';
@@ -137,6 +122,8 @@ export function editButtonEventListener() {
           createInputFormDate.type = 'date';
           createInputFormDatePickerLabel.innerHTML = 'Due Date:'
           let formLabel = document.createElement('label');
+          let formGroupOne = document.createElement('div');
+          formGroupOne.className= 'form-group-one'
           inputFormContainer.className = 'form-container';
           formLabel.className = 'form-group';
           formLabel.setAttribute('for', 'createNewTask');
@@ -152,19 +139,21 @@ export function editButtonEventListener() {
           createBackgroundComponent.style.backgroundColor = "#FFFFF";
           let contentDocument = document.querySelector('.mainContentContainer');
           createBackgroundComponent.appendChild(inputFormContainer);
-          inputFormContainer.appendChild(formLabel)
-          inputFormContainer.appendChild(document.createElement('br'))
+          formGroupOne.appendChild(formLabel)
+          formGroupOne.appendChild(createInputFormTitle);
+          formGroupOne.appendChild(createInputFormDatePickerLabel);
+          formGroupOne.appendChild(createInputFormDate);
+          formGroupOne.appendChild(createInputFormPriorityDropDown);
           contentDocument.appendChild(createSubmitComponent);
-          inputFormContainer.appendChild(createInputFormTitle);
-          inputFormContainer.appendChild(createInputFormDatePickerLabel);
-          inputFormContainer.appendChild(createInputFormDate);
-          inputFormContainer.appendChild(createInputFormPriorityDropDown);
           createSubmitComponent.appendChild(createBackgroundComponent);
           let buttonContainer = document.createElement('div');
           buttonContainer.className = 'task-button-holder'
           buttonContainer.append(submitButton);
           buttonContainer.append(cancelButton);
-          inputFormContainer.append(buttonContainer);
+          formGroupOne.append(buttonContainer);
+          inputFormContainer.appendChild(formGroupOne)
+          let createInputFormPriorityText1 = document.getElementById("input-dropdown");
+          let createInputFormPriorityText2 = document.getElementById("input-dropdown");
           priorityPick(createInputFormPriorityText1, createInputFormPriorityText2, createInputFormPriorityText3, createInputFormPriorityDropDownSpan);
           //create event listener for form to send to factory function
           //submit event listener

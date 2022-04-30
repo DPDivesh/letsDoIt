@@ -67,10 +67,10 @@ function defaultButtonAggregate() {
 
 function navContainerBuilder() {
   //create the overall container for nav
-  const queryBody = document.body;
+  const queryBody = document.getElementsByTagName('main');
   const toMain = document.createElement('div');
   toMain.className = 'navContentContainer';
-  queryBody.appendChild(toMain);
+  queryBody[0].appendChild(toMain);
   //create the default buttons container
   defaultButtonContainerBuilder(toMain);
   //create projects button

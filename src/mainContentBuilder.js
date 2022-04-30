@@ -58,10 +58,10 @@ function defaultButton() {
 }
 
 function mainContainerBuilder() {
-  const queryBody = document.body;
+  const queryBody = document.getElementsByTagName('main');
   const toMain = document.createElement('div');
   toMain.className = 'mainContentContainer';
-  queryBody.appendChild(toMain);
+  queryBody[0].appendChild(toMain);
 
   signOutButtonContainer(toMain);
   const signOutContainer = document.querySelector('.signOutContainer');

@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
-body,html{
+body{
+
+  min-height: 100vh;
+  width: 100%;
+}
+
+html{
+  font-family: 'Roboto', sans-serif;
+
+}
+
+main{
   display:flex;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  min-height: 100%;
 }
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 text-indent: 1vw;}
 
@@ -326,6 +337,13 @@ input.todo-checkbox{
   flex-direction: column;
 }
 
+.form-group-one{
+  margin-top: 1vw;
+  display: flex;
+  margin-left: 15%;
+  flex-direction: column;
+}
+
 
 .input-tasks{
   width:75%;
@@ -333,8 +351,9 @@ input.todo-checkbox{
   min-height: 25px;
   background-color:#EAEAEA;
   border:none;
+  margin-top: .5vw;
   border-radius:2vw;
-  margin-top: 1vw;
+  margin-bottom: 1vw;
   text-indent: 1vw;
   outline: none;
 }
@@ -348,7 +367,7 @@ input.todo-checkbox{
 
 .submit-task{
   font-size: 1.2rem;
-  width: 120px;
+  width: 10vw;
   min-width: 100px;
   height: 40px;
   box-shadow: 0px 2px 2.5px 0px rgba(0, 0, 0, 0.25);
@@ -365,7 +384,7 @@ input.todo-checkbox{
 .task-button-holder{
   display: flex;
   margin-top: 4%;
-  margin-left: 7%;
+  justify-content: center;
   }
 
   .drop-down{
@@ -504,20 +523,29 @@ border: 2px solid #C4C4C4;
 
 .project-edit{
   background-color:hsl(268, 88%, 36%);
-  width:570px;
-  min-width: 407px;
-  height:15.2vw;
+  min-width: 570px;
   min-height: 280px;
   border-radius:20px;
-  position: fixed;
-  left: 55%;
-  bottom:40%;
+  position: absolute;
+  left: 50%;
+  top:30%;
   transform: translate(-50%, 0);
   display:flex;
   justify-content: center;
   align-items: center;
   box-shadow:0px 4px 10px;
 }
+
+/* width:800px;
+border-radius: 7px;
+background:#6b6a63;
+margin:30px auto 0;
+padding:6px;
+position:absolute;
+left: 50%;
+top: 50%;
+margin-left: -400px;
+margin-top: -40px;  */
 
 .project-edit__innerLayer{
   background-color:#ffffff;
@@ -533,10 +561,8 @@ border: 2px solid #C4C4C4;
 
 
 .form-container{
-  width: 86%;
+  width: 100%;
   display: flex;
-  margin-top: 1vw;
-  margin-left: 14%;
   flex-direction: column;
 }
  .form-group{
@@ -574,7 +600,7 @@ border: 2px solid #C4C4C4;
 
 .cancel-submit{
   font-size: 1.2rem;
-  width: 120px;
+  width: 10vw;
   min-width: 100px;
   height: 40px;
   text-shadow: 1px 1px 4px #000000;
@@ -583,7 +609,7 @@ border: 2px solid #C4C4C4;
   color: white;
   border: none;
   border-radius: 20px;
-  margin-left: 20%;
+  margin-left: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
